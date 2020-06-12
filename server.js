@@ -35,7 +35,8 @@ app.use(express.static(path.join(__dirname, 'dist/Projects')));
 app.use('/images', express.static(path.join(__dirname, 'uploads/images')));
 app.use('/', express.static(path.join(__dirname, 'dist/Projects')));
 app.use('/revenue', express.static(path.join(__dirname, 'dist/Projects')));
-
+app.use('/courses', express.static(path.join(__dirname, 'dist/Projects')));
+app.use('/course/:courseId', express.static(path.join(__dirname, 'dist/Projects')));
 // use router
 app.use('/api/v1/revenue', revenueRouter);
 app.use('/api/v1/statistics', statisticsRouter);
