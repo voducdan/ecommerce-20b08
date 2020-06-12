@@ -10,6 +10,9 @@ const errorHandler = require('./middleware/errorHandler');
 
 // router module
 const revenueRouter = require('./routes/revenue.routes');
+const statisticsRouter = require('./routes/statistics.routes');
+const coursesRouter = require('./routes/courses.routes');
+const categoryRouter = require('./routes/category.routes');
 
 const app = express();
 
@@ -29,10 +32,15 @@ if (process.env.NODE_ENV === 'development') {
 }
 // use static
 app.use(express.static(path.join(__dirname, 'dist/Projects')));
+app.use('/images', express.static(path.join(__dirname, 'uploads/images')));
 app.use('/', express.static(path.join(__dirname, 'dist/Projects')));
+app.use('/revenue', express.static(path.join(__dirname, 'dist/Projects')));
 
 // use router
-// app.use('/api/v1/revenue', revenueRouter);
+app.use('/api/v1/revenue', revenueRouter);
+app.use('/api/v1/statistics', statisticsRouter);
+app.use('/api/v1/courses', coursesRouter);
+app.use('/api/v1/categories', categoryRouter);
 
 // use errorhandler middleware
 app.use(errorHandler);

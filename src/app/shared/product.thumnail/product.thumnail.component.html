@@ -1,0 +1,51 @@
+<img
+	class="card-img-top border-bottom"
+	[src]="product.image"
+	alt="Course image"
+/>
+<div class="card-body">
+	<h5 class="card-title mt-3">{{ product.name }}</h5>
+	<p class="card-text">
+		{{ product.author.name }}
+	</p>
+</div>
+<div class="rating">
+	<span class="stars-outer">
+		<span
+			class="stars-inner"
+			[style.width.%]="(product['avg_rating'] * 92) / 5"
+		>
+		</span>
+	</span>
+	<span style="margin-left: 5px;"
+		><span class="avg-rating" style="font-weight: 700; color: #505763;"
+			>{{ product.avg_rating }}
+		</span>
+		<span
+			class="num-of-reviews"
+			style="font-size: 12px; font-weight: 400; color: #686f7a;"
+			>({{ product.num_reviews }})
+		</span></span
+	>
+</div>
+<div class="price text-right" style="margin-right: 10px;">
+	<span class="real" *ngIf="product.price == 0"><b>Free</b></span>
+	<span class="real" *ngIf="!product.discount"
+		><b>${{ product.price }}</b></span
+	>
+	<span
+		*ngIf="product.discount"
+		class="real"
+		style="
+			text-decoration: line-through;
+			font-size: 13px;
+			margin-right: 5px;
+		"
+		>${{ product.price }}</span
+	>
+	<span *ngIf="product.discount" class="discount"
+		><b
+			>${{ product.price - (product.price * product.discount) / 100 }}</b
+		></span
+	>
+</div>

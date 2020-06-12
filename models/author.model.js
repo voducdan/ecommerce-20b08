@@ -35,4 +35,4 @@ const authorSchema = new mongoose.Schema({
 	last_modified: Date,
 });
 
-module.exports = new mongoose.model('Author', authorSchema);
+module.exports = mongoose.model('Author', authorSchema);

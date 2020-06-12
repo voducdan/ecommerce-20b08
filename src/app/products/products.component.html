@@ -1,0 +1,60 @@
+<div class="container">
+	<h4 class="mt-5">All Courses</h4>
+	<div class="list-courses">
+		<div *ngFor="let product of products" class="card course">
+			<a [routerLink]="[product.url + '-' + product._id]">
+				<app-products-thumnail
+					[product]="product"
+					class="course-thumnail"
+				></app-products-thumnail>
+			</a>
+			<div class="short-description">
+				<div class="card">
+					<div class="card-body">
+						<span class="last-update"
+							>Last update:
+							{{ product.last_modified | date: 'MM/yyyy' }}</span
+						>
+						<a href=""
+							><h5 class="card-title course-name">
+								<b>{{ product.name }}</b>
+							</h5></a
+						>
+						<h6
+							class="card-subtitle mb-2 text-muted course-category mb-2"
+						>
+							{{ product.category.title }}
+						</h6>
+						<span style="font-size: 0.8rem; color: #686f7a;">
+							<span>{{ product.num_lectures }} lectures</span>
+							&nbsp;
+							<span
+								>{{ product.estimate_content_length }} total
+								times</span
+							>
+							&nbsp;
+							<span>{{ product.level }}</span>
+						</span>
+						<p class="card-text course-headline mt-2">
+							{{ product.headline }}
+						</p>
+						<ul class="course-objectives">
+							<li *ngIf="product.objectives[0]" class="mb-1">
+								{{ product.objectives[0] }}
+							</li>
+							<li *ngIf="product.objectives[1]" class="mb-1">
+								{{ product.objectives[1] }}
+							</li>
+							<li *ngIf="product.objectives[2]" class="mb-1">
+								{{ product.objectives[2] }}
+							</li>
+						</ul>
+						<a href="#" class="card-link btn btn-danger"
+							>Add to card</a
+						>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

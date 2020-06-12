@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const slugify = require('slugify');
 const courseSchema = new mongoose.Schema(
 	{
 		name: {
@@ -98,10 +98,6 @@ const courseSchema = new mongoose.Schema(
 							item_length: String,
 							description: {
 								type: String,
-								required: [
-									true,
-									"Enter section's item description",
-								],
 							},
 							learn_url: String,
 							title: {
@@ -113,15 +109,14 @@ const courseSchema = new mongoose.Schema(
 									"Item's title must be less than or equal 100 characters",
 								],
 								minlength: [
-									10,
-									"Item's title must be greater than 10 characters",
+									1,
+									"Item's title must be greater than 5 characters",
 								],
 							},
 						},
 					],
 				}),
 			],
-			required: [true, 'A course must have at least 1 section'],
 		},
 		category: {
 			type: mongoose.Schema.ObjectId,
@@ -140,6 +135,7 @@ const courseSchema = new mongoose.Schema(
 			type: String,
 			required: [true, 'Please add a description'],
 		},
+		slug: String,
 		objectives: [String],
 		incentives_list: [String],
 	},
@@ -151,9 +147,19 @@ const courseSchema = new mongoose.Schema(
 
 courseSchema.pre(/^find/, function (next) {
 	this.populate('author');
-	this.populate('category', 'title');
-	this.populate('sub_category', 'name');
-	this.populate('topic', 'title');
+	this.populate({
+		path: 'category',
+		populate: {
+			path: 'parents_category',
+		},
+	});
+	this.populate('topic');
+	next();
+});
+
+courseSchema.pre('save', function (next) {
+	this.slug = slugify(this.name, { lower: true });
+	this.url = '/course/' + this.slug;
 	next();
 });
 

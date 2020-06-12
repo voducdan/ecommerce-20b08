@@ -9,7 +9,7 @@ const topicSchema = new mongoose.Schema({
 			100,
 			"Topic's title must be less than or equal 100 characters",
 		],
-		minlength: [5, "Topic's title must be greater than 5 characters"],
+		minlength: [2, "Topic's title must be greater than 2 characters"],
 	},
 	url: {
 		type: String,

@@ -78,6 +78,9 @@ const userSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+	day: Number,
+	month: Number,
+	year: Number,
 	last_modified: Date,
 	cart: [
 		{
@@ -85,6 +88,28 @@ const userSchema = new mongoose.Schema({
 			ref: 'Course',
 		},
 	],
+});
+
+userSchema.statics.getUsersInMonth = async function (month, year) {
+	const usersInMonth = await this.aggregate([
+		{
+			$match: { month, year },
+		},
+		{
+			$group: {
+				_id: '$day',
+				count: { $sum: 1 },
+			},
+		},
+	]);
+	return usersInMonth;
+};
+
+userSchema.pre('save', function (next) {
+	this.day = new Date().getDate();
+	this.month = new Date().getMonth() + 1;
+	this.year = new Date().getFullYear();
+	next();
 });
 
 module.exports = mongoose.model('User', userSchema);
