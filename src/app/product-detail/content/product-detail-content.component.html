@@ -1,0 +1,130 @@
+<div class="container">
+	<div class="row">
+		<div class="col-8 col-lg-8">
+			<div class="course-content">
+				<div class="course-content-box">
+					<div class="curriculum-header">
+						<h5 class="course-content-text">Course content</h5>
+						<div class="hearder-right">
+							<a (click)="expandAll()" class="expand-btn">{{
+								isExpand == false
+									? 'Expand all'
+									: 'Collapse all'
+							}}</a>
+							<span class="num-lecttures">{{
+								num_lectures
+							}}</span>
+							<span class="estimate-length">{{
+								estimate_content_length
+							}}</span>
+						</div>
+					</div>
+					<div
+						*ngFor="let section of sections; index as i"
+						class="card"
+					>
+						<div class="section-container" [id]="'heading' + i">
+							<h5 class="mb-0 section-container-left">
+								<a
+									class="section-collapse-btn collapsed"
+									data-toggle="collapse"
+									[attr.data-target]="'#' + i"
+									aria-expanded="false"
+									[attr.aria-controls]="i"
+								>
+									<i class="fa" aria-hidden="true"></i>
+									<b class="section-title">{{
+										section.title
+									}}</b>
+								</a>
+							</h5>
+							<div class="section-container-right">
+								<span
+									class="num-items-in-section"
+									data-purpose="num-items-in-section"
+									>{{ section.lecture_count }} lectures</span
+								>
+								<span class="section-header-length">{{
+									section.section_length * 1000
+										| date: 'H:mm:ss':'UTC'
+								}}</span>
+							</div>
+						</div>
+
+						<div
+							[id]="i"
+							[ngClass]="{
+								show: isExpand === true,
+								collapse: true
+							}"
+							[attr.aria-labelledby]="'heading' + i"
+							data-parent="#accordion"
+						>
+							<div class="card-body" style="padding: 0;">
+								<div
+									*ngFor="
+										let item of section.items;
+										index as ii
+									"
+									class="lecture-container lecture-container--preview"
+									data-purpose="lecture-item-1-1"
+								>
+									<div class="left-content">
+										<span
+											class="udi udi-play-circle"
+										></span>
+										<div class="top">
+											<div
+												[innerHTML]="item.description"
+												class="description collapse"
+												data-purpose="safely-set-inner-html:section-item:description"
+												style="height: 0px;"
+												[id]="ii + 'item' + i"
+												[attr.aria-labelledby]="
+													'heading' + ii + 'item' + i
+												"
+												data-parent="#accordion"
+											></div>
+											<div class="title">
+												<a>{{ item.title }}</a>
+												<a
+													class="section-collapse-btn collapsed"
+													data-toggle="collapse"
+													[attr.data-target]="
+														'#' + ii + 'item' + i
+													"
+													aria-expanded="false"
+													[attr.aria-controls]="
+														ii + 'item' + i
+													"
+													class="down-arrow"
+													><span
+														aria-label="Show description"
+														data-purpose="lecture-caret-1-1"
+														class="udi udi-caret-down"
+													></span
+												></a>
+											</div>
+										</div>
+									</div>
+									<div class="details">
+										<a
+											*ngIf="item.can_be_previewed"
+											href="#"
+											data-purpose="preview-course"
+											><span class="preview-text"
+												>Preview</span
+											></a
+										><span class="content-summary">{{
+											item.item_length
+										}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

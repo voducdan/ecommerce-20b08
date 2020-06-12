@@ -1,0 +1,28 @@
+.objectives {
+	background-color: #f9f9f9;
+	border: 1px solid #dedfe0;
+	margin: 40px 20px 0 0;
+}
+.objectives-box {
+	padding: 20px;
+}
+.objectives-list {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	list-style: none;
+	justify-content: space-between;
+}
+
+.objectives-list li {
+	width: calc(90% / 2);
+	margin-bottom: 5px;
+}
+.objectives-list li::before {
+	content: '\f00c';
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 600;
+	margin-right: 5px;
+	color: #648c8c;
+	font-size: 15px;
+}

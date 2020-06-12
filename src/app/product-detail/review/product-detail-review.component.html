@@ -1,0 +1,122 @@
+<div class="container">
+	<div class="row">
+		<div class="col-8 col-lg-8">
+			<div class="review">
+				<div class="reviews-section--sub-title--3rGCt">
+					<div class="reviews-section--sub-title-text--6rNmr">
+						<span>Reviews</span>
+					</div>
+					<form class="form-inline search-widget--search-form--3Kx8y">
+						<div class="form-group form-group-sm has-feedback">
+							<span class="input-group"
+								><label
+									for="reviews-search-text-input"
+									class="sr-only control-label"
+									>Search reviews</label
+								><input
+									placeholder="Search reviews"
+									data-purpose="search-input"
+									type="text"
+									id="reviews-search-text-input"
+									class="search-widget--search-text-input--14MNb form-control"
+									value="" /><span class="input-group-btn"
+									><button
+										data-purpose="search-button"
+										type="button"
+										class="btn btn-sm btn-secondary search-review-btn"
+									>
+										<span
+											aria-label="Search"
+											class="udi udi-search"
+										></span></button></span
+							></span>
+						</div>
+					</form>
+				</div>
+				<div
+					*ngFor="let review of reviews"
+					class="reviews-section--review-container--X0uGE"
+				>
+					<div class="individual-review--container--3kHO-">
+						<div class="individual-review--right-column--1jp7O">
+							<span class="stars-outer">
+								<span
+									class="stars-inner"
+									[style.width.%]="
+										(review['rating'] * 92) / 5
+									"
+								>
+								</span>
+							</span>
+							<div>
+								<span style="font-size: 0px;"></span>
+								<div
+									class="individual-review--comment-content--2pCWg"
+								>
+									<div
+										class="view-more-container--view-more--25_En"
+									>
+										<div
+											style="
+												height: 200px;
+												overflow: hidden;
+											"
+										>
+											<div>
+												<div
+													data-purpose="review-comment-content"
+												>
+													<p>
+														{{ review.content }}
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="individual-review--left-column--uKkcj">
+							<div
+								aria-label="David Johnson"
+								class="individual-review--author-avatar--15MOW user-avatar user-avatar--initials"
+								data-purpose="review-author-avatar"
+								style="
+									background-color: rgb(104, 111, 122);
+									font-size: 15px;
+									width: 48px;
+								"
+							>
+								<div class="user-avatar__inner fx-c">
+									<span class="user-initials">{{
+										review.user.firstname
+											.substr(0, 2)
+											.toUpperCase()
+									}}</span>
+								</div>
+							</div>
+							<div
+								class="individual-review--detail-container--30whp"
+							>
+								<div
+									class="ellipsis individual-review--detail-user-name--2JyaY"
+									data-purpose="review-detail-user-name"
+								>
+									{{ review.user.firstname }}
+									{{ review.user.lastname }}
+								</div>
+								<div
+									class="individual-review--detail-created--1liJC"
+								>
+									{{ reviewTime(review.create_at).value }}
+									{{ reviewTime(review.create_at).type }}
+									ago
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

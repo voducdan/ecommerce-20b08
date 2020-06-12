@@ -9,7 +9,11 @@ import { GlobalVariables } from '../global/global.variable';
 @Component({
 	selector: 'app-product-detail',
 	templateUrl: './product-detail.component.html',
-	styleUrls: ['./product-detail.component.css'],
+	styleUrls: [
+		'./product-detail.component.css',
+		'./product-detail-breadcrumb.component.css',
+		'./product-detail-objectives.component.css',
+	],
 })
 export class ProductDetailComponent implements OnInit {
 	constructor(
@@ -18,7 +22,6 @@ export class ProductDetailComponent implements OnInit {
 	) {}
 	product: IProduct;
 	reviews: IReview[];
-	isExpand = false;
 	ngOnInit(): void {
 		const productId = this.route.snapshot.paramMap.get('courseId');
 		this.productDetailService
@@ -31,15 +34,5 @@ export class ProductDetailComponent implements OnInit {
 				this.product.author.image =
 					GlobalVariables.staticImage + this.product.author.image;
 			});
-	}
-	expandAll() {
-		this.isExpand = !this.isExpand;
-	}
-
-	reviewTime(IOStime: string): any {
-		const diff: number = new Date().getTime() - new Date(IOStime).getTime();
-		return new Date(diff).getMonth() > 1
-			? { type: 'months', value: new Date(diff).getMonth() }
-			: { type: 'days', value: new Date(diff).getDate() };
 	}
 }

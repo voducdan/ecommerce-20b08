@@ -1,0 +1,139 @@
+<div class="banner">
+	<div class="container">
+		<div class="row">
+			<div class="col-8 py-5">
+				<div class="title">
+					<h2>{{ product.name }}</h2>
+				</div>
+				<div class="headline mb-2">
+					<h5 style="font-weight: 400;">
+						{{ product.headline }}
+					</h5>
+				</div>
+				<div class="number mb-2">
+					<span class="stars-outer mr-3">
+						<span
+							class="stars-inner"
+							[style.width.%]="(product['avg_rating'] * 92) / 5"
+						>
+						</span>
+					</span>
+					<span class="rating mr-3"
+						>{{ product['avg_rating'] }}({{
+							product.num_reviews
+						}}
+						ratings)</span
+					>
+					<span class="student-enrolled"
+						>{{ product.num_students_enrolled }} students
+						enrolled</span
+					>
+				</div>
+				<div class="author mb-2">
+					<span class="mr-3"
+						>Create by {{ product.author.name }}</span
+					>
+					<span>
+						Last updated
+						{{ product.last_modified | date: 'M/yyyy' }}</span
+					>
+				</div>
+				<div class="language-caption">
+					<span class="language mr-3"
+						><i class="fas fa-comment mr-1"></i
+						>{{ product.language }}</span
+					>
+					<span class="caption"
+						><i class="fas fa-closed-captioning mr-1"></i
+						>{{ product.caption_languages[0] }},
+					</span>
+					<span
+						*ngIf="product.caption_languages.length > 1"
+						class="more-caption"
+						style="text-decoration: underline;"
+					>
+						{{ product.caption_languages.length }} more
+						<div class="more-caption-box">
+							<span
+								*ngFor="
+									let caption_language of product.caption_languages
+										| slice: 1;
+									index as i
+								"
+								>{{ caption_language }}</span
+							>
+						</div>
+					</span>
+				</div>
+			</div>
+			<div class="preview-box col-4">
+				<div class="preview-box-inside">
+					<div class="image">
+						<img [src]="product.image" alt="" />
+						<span>Preview this course</span>
+						<div class="play"></div>
+						<i class="fas fa-play"></i>
+					</div>
+					<div class="price">
+						<span class="real" *ngIf="!product.discount"
+							><h2>
+								<b>${{ product.price }}</b>
+							</h2></span
+						>
+						<span *ngIf="product.discount" class="discount"
+							><h2>
+								<b
+									>${{
+										product.price -
+											(product.price * product.discount) /
+												100
+									}}</b
+								>
+							</h2></span
+						>
+						<span
+							*ngIf="product.discount"
+							class="real mx-2"
+							style="
+								text-decoration: line-through;
+								color: #8a92a3;
+							"
+							>${{ product.price }}</span
+						>
+						<span
+							*ngIf="product.discount"
+							class="discount"
+							style="color: #8a92a3;"
+							>{{ product.discount }}% off</span
+						>
+					</div>
+					<div class="btn btn-danger add-to-cart">
+						Add to cart
+					</div>
+					<div class="btn btn-outline-secondary buy-now">
+						Buy now
+					</div>
+					<span class="money-back">30-Day Money-Back Guarantee</span>
+					<div class="incentives">
+						<span>This course includes</span>
+						<ul class="incentives-list">
+							<li
+								*ngFor="
+									let incentive of product.incentives_list
+								"
+							>
+								{{ incentive }}
+							</li>
+						</ul>
+					</div>
+					<span class="apply-coupon">Apply Coupon</span>
+					<hr style="width: 80%;" />
+					<span class="share-course my-3"
+						><i class="fa fa-share mr-1" aria-hidden="true"></i
+						>Share</span
+					>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

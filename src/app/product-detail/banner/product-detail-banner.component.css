@@ -1,0 +1,57 @@
+.stars-outer {
+	display: inline-block;
+	position: relative;
+	font-family: 'Font Awesome 5 Free';
+	bottom: 1px;
+}
+
+.stars-outer::before {
+	content: '\f005 \f005 \f005 \f005 \f005';
+	font-size: 13px;
+	margin-right: 5px;
+	color: #dedfe0;
+}
+
+.stars-outer .stars-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.stars-outer .stars-inner::before {
+	content: '\f005 \f005 \f005 \f005 \f005';
+	color: #f8ce0b;
+	font-size: 13px;
+	margin-right: 5px;
+	font-weight: 900;
+}
+.banner {
+	background-color: #29303b;
+	color: white;
+	margin-top: -16px;
+}
+
+.more-caption {
+	position: relative;
+}
+.more-caption:hover .more-caption-box {
+	display: flex;
+	flex-direction: column;
+	z-index: 20;
+}
+
+.more-caption-box {
+	display: none;
+	position: absolute;
+	background-color: white;
+	width: 250px;
+	color: black;
+	font-size: 13px;
+	font-weight: 400;
+	left: -50%;
+	transform: translate(-15%, 0);
+	text-align: center;
+	padding: 10px 0;
+}
