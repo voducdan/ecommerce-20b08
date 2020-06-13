@@ -1,4 +1,5 @@
+import { environment } from '../../environments/environment';
 export class GlobalVariables {
-	public static apiURLDev: string = 'http://localhost:3000/api/v1';
-	public static staticImage: string = 'http://localhost:3000';
+	public static apiURL: string = environment.API_URL;
+	public static staticImage: string = environment.IMAGE_URL;
 }

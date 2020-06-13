@@ -1,0 +1,207 @@
+.instructor,
+.instructor__wrapper {
+	position: relative;
+}
+
+.instructors--instructors--29_-v {
+	background-color: #fff;
+	border: 1px solid #dedfe0;
+	padding: 16px;
+}
+
+@media (min-width: 768px) {
+	.instructors--instructors--29_-v {
+		background-color: inherit;
+		border: 0;
+	}
+}
+
+.instructor--instructor--2qudS {
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	padding: 0;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+	.instructor--instructor--2qudS {
+		background-color: #f2f3f5;
+		padding: 10px 15px;
+	}
+}
+
+@media screen and (min-width: 576px) {
+	.instructor--instructor--2qudS {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		flex-direction: row;
+		background: 0 0;
+		border: none;
+		padding: 20px 0 0;
+	}
+}
+
+.instructor--instructor--2qudS .instructor--instructor__image-and-stats--3upAA {
+	display: flex;
+}
+
+@media screen and (min-width: 576px) {
+	.instructor--instructor--2qudS
+		.instructor--instructor__image-and-stats--3upAA {
+		display: flex;
+		flex-direction: column;
+		margin-right: 60px;
+		width: 170px;
+	}
+}
+
+@media screen and (min-width: 576px) {
+	.instructor--instructor--2qudS
+		.instructor--instructor__image-and-stats--3upAA
+		.instructor--instructor__image--3gGa8 {
+		margin-top: 0;
+	}
+}
+
+.instructor--instructor--2qudS
+	.instructor--instructor__image-and-stats--3upAA
+	.instructor--instructor__image--3gGa8 {
+	flex: 0 0 auto;
+	min-width: 1px;
+	margin: 5px 15px 0 0;
+}
+
+.instructor--instructor--2qudS
+	.instructor--instructor__image-and-stats--3upAA
+	.instructor--instructor__stats--1eL5l
+	.instructor--instructor__stat-row--JDvkn {
+	height: 26px;
+}
+
+.instructor--instructor--2qudS
+	.instructor--instructor__image-and-stats--3upAA
+	.instructor--instructor__stats--1eL5l
+	.instructor--instructor__stat--idAfz {
+	font-size: 13px;
+	word-break: break-all;
+	-ms-word-break: break-all;
+}
+
+@media (min-width: 768px) {
+	.instructor--instructor--2qudS
+		.instructor--instructor__image-and-stats--3upAA
+		.instructor--instructor__stats--1eL5l
+		.instructor--instructor__stat-value--2Kwe1 {
+		font-size: 15px;
+		font-weight: 700;
+	}
+}
+.instructor--instructor--2qudS
+	.instructor--instructor__image-and-stats--3upAA
+	.instructor--instructor__stats--1eL5l
+	.instructor--instructor__stat-value--2Kwe1 {
+	letter-spacing: 0;
+}
+
+.instructor--instructor--2qudS
+	.instructor--instructor__image-and-stats--3upAA
+	.instructor--instructor__stats--1eL5l
+	.instructor--instructor__stat-icon--3QPJ7 {
+	font-size: 16px;
+	padding-right: 5px;
+	padding-top: 3px;
+	width: 25px;
+	vertical-align: top;
+}
+
+.udi {
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 600;
+	font-size: 13px;
+}
+
+.udi-star:before {
+	content: '\F005';
+}
+.udi-comment:before {
+	content: '\F075';
+}
+
+.udi-user:before {
+	content: '\F007';
+}
+.udi-num-of-course:before {
+	content: '\F144';
+}
+
+.fx {
+	flex: 1;
+	min-width: 1px;
+}
+
+@media screen and (min-width: 576px) {
+	.instructor--instructor--2qudS
+		.instructor--instructor__title-and-job-title--1nr2Z {
+		min-width: 100%;
+	}
+}
+
+.instructor--instructor--2qudS .instructor--instructor__title--2-Bub {
+	font-size: 15px;
+	line-height: 1.33;
+	margin-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+	.instructor--instructor--2qudS .instructor--instructor__title--2-Bub {
+		font-size: 18px;
+		margin-bottom: 8px;
+	}
+}
+
+.instructor--instructor--2qudS .instructor--instructor__job-title--opFWR {
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 1.33;
+	margin-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+	.instructor--instructor--2qudS .instructor--instructor__job-title--opFWR {
+		font-weight: 700;
+		margin-bottom: 8px;
+	}
+}
+
+.instructor--instructor--2qudS
+	.instructor--instructor__title--2-Bub
+	.instructor--title__link--1NJ6S {
+	font-weight: 700;
+}
+
+@media screen and (min-width: 576px) {
+	.instructor--instructor--2qudS .instructor--instructor__description--1A0ot {
+		flex-basis: calc(100% - 230px);
+		position: relative;
+	}
+}
+
+.instructor--instructor--2qudS
+	.instructor--instructor__description--1A0ot
+	.instructor--instructor__description-content--1CtQI {
+	margin-top: 10px;
+}
+
+.instructor--instructor--2qudS
+	.instructor--instructor__image-and-stats--3upAA
+	.instructor--instructor__image--3gGa8
+	.user-avatar--image {
+	border-radius: 50%;
+	border: 1px solid #dedfe0;
+}
+.individual-review--container--3kHO-:after {
+	clear: both;
+}

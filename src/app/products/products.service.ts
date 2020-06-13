@@ -40,7 +40,7 @@ export class ProductService {
 
 	getProducts(): Observable<any> {
 		return this.http
-			.get(GlobalVariables.apiURLDev + '/courses', httpOptions)
+			.get(GlobalVariables.apiURL + '/courses', httpOptions)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
 }

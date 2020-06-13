@@ -1,0 +1,27 @@
+.banner {
+	background-color: #29303b;
+	color: white;
+	margin-top: -16px;
+}
+
+.more-caption {
+	position: relative;
+}
+.more-caption:hover .more-caption-box {
+	display: flex;
+	flex-direction: column;
+}
+
+.more-caption-box {
+	display: none;
+	position: absolute;
+	background-color: white;
+	width: 250px;
+	color: black;
+	font-size: 13px;
+	font-weight: 400;
+	left: -50%;
+	transform: translate(-15%, 0);
+	text-align: center;
+	padding: 10px 0;
+}

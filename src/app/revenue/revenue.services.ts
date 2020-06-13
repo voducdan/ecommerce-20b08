@@ -39,7 +39,7 @@ export class RevenueService {
 
 	getRevenue(): Observable<any> {
 		return this.http
-			.get(GlobalVariables.apiURLDev + '/revenue/date', httpOptions)
+			.get(GlobalVariables.apiURL + '/revenue/date', httpOptions)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
 }
