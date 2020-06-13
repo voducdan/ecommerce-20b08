@@ -1,0 +1,32 @@
+.student-buy {
+	background-color: #f9f9f9;
+	border: 1px solid #dedfe0;
+	margin: 40px 20px 0 0;
+}
+.student-buy-box {
+	padding: 20px;
+}
+
+.list-courses {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+.course {
+	width: calc(98% / 3);
+	margin-right: 1%;
+	margin-bottom: 45px;
+	box-shadow: 0 0 1px 1px rgba(20, 23, 28, 0.1),
+		0 3px 1px 0 rgba(20, 23, 28, 0.1);
+	position: relative;
+}
+.course:nth-child(3n) {
+	margin-right: 0px;
+}
+.course:hover {
+	box-shadow: 0 0 3px 3px rgba(20, 23, 28, 0.1),
+		0 6px 3px 0 rgba(20, 23, 28, 0.1);
+}
+.course a {
+	text-decoration: none;
+}

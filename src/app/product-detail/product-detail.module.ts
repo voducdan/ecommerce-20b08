@@ -9,15 +9,22 @@ import { ReviewComponent } from './review/review.component';
 import { BannerComponent } from './banner/banner.component';
 import { ContentComponent } from './content/content.component';
 import { AuthorComponent } from './author/author.component';
+import { StudentBuyComponent } from './student-buy/product-detail-student-buy.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-	imports: [CommonModule, RouterModule.forChild(productDetailRoutes)],
+	imports: [
+		CommonModule,
+		SharedModule,
+		RouterModule.forChild(productDetailRoutes),
+	],
 	declarations: [
 		ReviewComponent,
 		BannerComponent,
 		ContentComponent,
 		AuthorComponent,
 		ProductDetailComponent,
+		StudentBuyComponent,
 	],
 	providers: [],
 })

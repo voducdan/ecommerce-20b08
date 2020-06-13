@@ -9,19 +9,15 @@ import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { RevenueComponent } from './revenue/revenue.component';
 import { ProductComponent } from './products/products.component';
-import { ProductThumnail } from './shared/product.thumnail/product.thumnail.component';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
-	declarations: [
-		AppComponent,
-		RevenueComponent,
-		ProductComponent,
-		ProductThumnail,
-	],
+	declarations: [AppComponent, RevenueComponent, ProductComponent],
 	imports: [
 		RouterModule.forRoot(appRoutes),
 		BrowserModule,
 		HttpClientModule,
 		ChartsModule,
+		SharedModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

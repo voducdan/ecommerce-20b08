@@ -1,7 +1,7 @@
 const express = require('express');
 
-const getCategories = require('../controllers/getCategories');
-const getCategoryCourses = require('../controllers/getCategoryCourses');
+const getCategories = require('../controllers/category/getCategories');
+const getCategoryCourses = require('../controllers/category/getCategoryCourses');
 
 const router = express.Router();
 

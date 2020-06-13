@@ -14,4 +14,9 @@ export const appRoutes: Routes = [
 				(m) => m.ProductDetailModule
 			),
 	},
+	{
+		path: '**',
+		redirectTo: '/courses',
+		pathMatch: 'full',
+	},
 ];

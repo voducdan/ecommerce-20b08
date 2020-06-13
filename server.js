@@ -13,6 +13,7 @@ const revenueRouter = require('./routes/revenue.routes');
 const statisticsRouter = require('./routes/statistics.routes');
 const coursesRouter = require('./routes/courses.routes');
 const categoryRouter = require('./routes/category.routes');
+const userRouter = require('./routes/user.routes');
 
 const app = express();
 
@@ -36,12 +37,17 @@ app.use('/images', express.static(path.join(__dirname, 'uploads/images')));
 app.use('/', express.static(path.join(__dirname, 'dist/Projects')));
 app.use('/revenue', express.static(path.join(__dirname, 'dist/Projects')));
 app.use('/courses', express.static(path.join(__dirname, 'dist/Projects')));
-app.use('/course/:courseId', express.static(path.join(__dirname, 'dist/Projects')));
+app.use(
+	'/course/:courseId',
+	express.static(path.join(__dirname, 'dist/Projects'))
+);
+app.use('/user', express.static(path.join(__dirname, 'dist/Projects')));
 // use router
 app.use('/api/v1/revenue', revenueRouter);
 app.use('/api/v1/statistics', statisticsRouter);
 app.use('/api/v1/courses', coursesRouter);
 app.use('/api/v1/categories', categoryRouter);
+app.use('/api/v1/user', userRouter);
 
 // use errorhandler middleware
 app.use(errorHandler);

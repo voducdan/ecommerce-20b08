@@ -43,4 +43,15 @@ export class ProductDetailService {
 			.get(GlobalVariables.apiURL + '/courses/' + productId, httpOptions)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
+	getstudentBuy(categoryId: String): Observable<any> {
+		return this.http
+			.get(
+				GlobalVariables.apiURL +
+					'/courses/' +
+					categoryId +
+					'/suggestion',
+				httpOptions
+			)
+			.pipe(map(this.extractData), catchError(this.handleError));
+	}
 }

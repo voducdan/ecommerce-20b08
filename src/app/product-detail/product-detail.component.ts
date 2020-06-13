@@ -22,17 +22,34 @@ export class ProductDetailComponent implements OnInit {
 	) {}
 	product: IProduct;
 	reviews: IReview[];
+	studentBuy: IProduct[];
 	ngOnInit(): void {
-		const productId = this.route.snapshot.paramMap.get('courseId');
-		this.productDetailService
+		this.route.params.subscribe(async (routerParams) => {
+			await this.fetchData(routerParams.courseId);
+			window.scroll(0, 0);
+		});
+	}
+	fetchProductDetail(productId): Promise<any> {
+		return this.productDetailService
 			.getProductDetail(productId)
-			.subscribe((res) => {
-				this.product = res.data[0];
-				this.reviews = res.reviews;
-				this.product.image =
-					GlobalVariables.staticImage + this.product.image;
-				this.product.author.image =
-					GlobalVariables.staticImage + this.product.author.image;
-			});
+			.toPromise();
+	}
+	fetchStudentBuy(categoryId): Promise<any> {
+		return this.productDetailService.getstudentBuy(categoryId).toPromise();
+	}
+	async fetchData(productId) {
+		const resProductDetail = await this.fetchProductDetail(productId);
+		this.product = resProductDetail.data[0];
+		this.reviews = resProductDetail.reviews;
+		this.product.image = GlobalVariables.staticImage + this.product.image;
+		this.product.author.image =
+			GlobalVariables.staticImage + this.product.author.image;
+		const resStudentBuy = await this.fetchStudentBuy(
+			this.product.category.parents_category._id
+		);
+		this.studentBuy = resStudentBuy.data;
+		this.studentBuy.forEach((element) => {
+			element.image = GlobalVariables.staticImage + element.image;
+		});
 	}
 }

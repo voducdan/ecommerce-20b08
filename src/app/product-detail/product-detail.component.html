@@ -5,20 +5,23 @@
 				<li class="breadcrumb-item">
 					<a href="#"
 						><b>{{
-							product.category.parents_category['title']
+							(product?.category.parents_category)['title']
 						}}</b></a
 					>
 				</li>
 				<li class="breadcrumb-item">
-					<a href="#">{{ product.category.title }}</a>
+					<a href="#">{{ product?.category.title }}</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a href="#">{{ product.topic.title }}</a>
+					<a href="#">{{ product?.topic.title }}</a>
 				</li>
 			</ol>
 		</div>
 	</nav>
-	<app-product-detail-banner [product]="product"></app-product-detail-banner>
+	<app-product-detail-banner
+		*ngIf="product"
+		[product]="product"
+	></app-product-detail-banner>
 	<div class="container">
 		<div class="row">
 			<div class="col-8 col-lg-8">
@@ -26,7 +29,7 @@
 					<div class="objectives-box">
 						<h4><b>What you'll learn</b></h4>
 						<ul class="objectives-list">
-							<li *ngFor="let objective of product.objectives">
+							<li *ngFor="let objective of product?.objectives">
 								{{ objective }}
 							</li>
 						</ul>
@@ -36,9 +39,9 @@
 		</div>
 	</div>
 	<app-product-detail-content
-		[sections]="product.sections"
-		[num_lectures]="product.num_lectures"
-		[estimate_content_length]="product.estimate_content_length"
+		[sections]="product?.sections"
+		[num_lectures]="product?.num_lectures"
+		[estimate_content_length]="product?.estimate_content_length"
 	></app-product-detail-content>
 
 	<div class="container">
@@ -47,7 +50,7 @@
 				<div class="requirements">
 					<h4 style="font-weight: 700;">Requirements</h4>
 					<ul class="requirements-list">
-						<li *ngFor="let requirement of product.requirements">
+						<li *ngFor="let requirement of product?.requirements">
 							{{ requirement }}
 						</li>
 					</ul>
@@ -61,14 +64,21 @@
 				<div class="course-description">
 					<h4 style="font-weight: 700;">Descriptions</h4>
 					<div class="course-description-text">
-						<p>{{ product.description }}</p>
+						<p>{{ product?.description }}</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<app-product-detail-student-buy
+		[products]="studentBuy"
+	></app-product-detail-student-buy>
 	<app-product-detail-author
+		*ngIf="product?.author"
 		[author]="product.author"
 	></app-product-detail-author>
-	<app-product-detail-review [reviews]="reviews"></app-product-detail-review>
+	<app-product-detail-review
+		*ngIf="reviews"
+		[reviews]="reviews"
+	></app-product-detail-review>
 </div>

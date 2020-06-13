@@ -1,7 +1,7 @@
 const express = require('express');
 
-const revunueResult = require('../controllers/revenueResult');
-const revunueCategoryResult = require('../controllers/revunueCategoryResult');
+const revunueResult = require('../controllers/revenue/revenueResult');
+const revunueCategoryResult = require('../controllers/revenue/revunueCategoryResult');
 
 const router = express.Router();
 
