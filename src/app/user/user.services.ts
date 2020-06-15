@@ -5,8 +5,9 @@ import {
 	HttpHeaders,
 	HttpErrorResponse,
 } from '@angular/common/http';
+
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { GlobalVariables } from '../global/index';
 
@@ -18,7 +19,7 @@ const httpOptions = {
 @Injectable({
 	providedIn: 'root',
 })
-export class ProductDetailService {
+export class UserService {
 	constructor(private http: HttpClient) {}
 
 	private handleError(error: HttpErrorResponse) {
@@ -38,20 +39,10 @@ export class ProductDetailService {
 		return body || {};
 	}
 
-	getProductDetail(productId: String): Observable<any> {
+	register(userDate): Observable<any> {
+		httpOptions.params = userDate;
 		return this.http
-			.get(GlobalVariables.apiURL + '/courses/' + productId, httpOptions)
-			.pipe(map(this.extractData, catchError(this.handleError)));
-	}
-	getstudentBuy(categoryId: String): Observable<any> {
-		return this.http
-			.get(
-				GlobalVariables.apiURL +
-					'/courses/' +
-					categoryId +
-					'/suggestion',
-				httpOptions
-			)
-			.pipe(map(this.extractData, catchError(this.handleError)));
+			.post(GlobalVariables.apiURL + '/user', httpOptions)
+			.pipe(map(this.extractData), catchError(this.handleError));
 	}
 }

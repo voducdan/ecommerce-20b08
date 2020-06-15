@@ -1,0 +1,196 @@
+<div class="container">
+	<form
+		(ngSubmit)="signUpForm.form.valid && onSubmit()"
+		#signUpForm="ngForm"
+		[mustMatch]="['password', 'passwordComfirm']"
+	>
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-8 col-lg-8 col-xl-6">
+				<div class="row">
+					<div class="col text-center">
+						<h1>Register</h1>
+						<p class="text-h3">
+							Sign Up and Start Learning!
+						</p>
+					</div>
+				</div>
+				<div class="row align-items-center">
+					<div class="col mt-4">
+						<div
+							*ngIf="
+								signUpForm.submitted &&
+								signUpForm.controls.firstname?.invalid
+							"
+						>
+							<em
+								class="required-err"
+								*ngIf="
+									signUpForm.controls.firstname?.errors
+										.required
+								"
+								>Please fill out this filed!</em
+							>
+						</div>
+
+						<input
+							[(ngModel)]="user.firstname"
+							name="firstname"
+							type="text"
+							class="form-control"
+							placeholder="Firstname"
+							required
+						/>
+					</div>
+					<div class="col mt-4">
+						<div
+							*ngIf="
+								signUpForm.submitted &&
+								signUpForm.controls.lastname?.invalid
+							"
+						>
+							<em
+								class="required-err"
+								*ngIf="
+									signUpForm.controls.lastname?.errors
+										.required
+								"
+								>Please fill out this filed!</em
+							>
+						</div>
+						<input
+							[(ngModel)]="user.lastname"
+							type="text"
+							name="lastname"
+							class="form-control"
+							placeholder="Lastname"
+							required
+						/>
+					</div>
+				</div>
+				<div class="row align-items-center mt-4">
+					<div class="col">
+						<div
+							*ngIf="
+								signUpForm.submitted &&
+								signUpForm.controls.email?.invalid
+							"
+						>
+							<em
+								class="required-err"
+								*ngIf="
+									signUpForm.controls.email?.errors.required
+								"
+								>Please fill out this filed!</em
+							>
+							<em
+								*ngIf="
+									signUpForm.controls.email?.errors.pattern
+								"
+								>Please enter a valid email!</em
+							>
+						</div>
+						<input
+							[(ngModel)]="user.email"
+							name="email"
+							type="email"
+							pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+							class="form-control"
+							placeholder="Email"
+							required
+						/>
+					</div>
+				</div>
+				<div class="row align-items-center mt-4">
+					<div class="col">
+						<div
+							*ngIf="
+								signUpForm.submitted &&
+								signUpForm.controls.password?.invalid
+							"
+						>
+							<em
+								class="required-err"
+								*ngIf="
+									signUpForm.controls.password?.errors
+										.required
+								"
+								>Please fill out this filed!</em
+							>
+							<em
+								*ngIf="
+									signUpForm.controls.password?.errors
+										.minlength
+								"
+								>Password must be at least 6 characters</em
+							>
+						</div>
+						<input
+							[(ngModel)]="user.password"
+							type="password"
+							name="password"
+							class="form-control"
+							placeholder="Password"
+							required
+							minlength="6"
+						/>
+					</div>
+					<div class="col">
+						<div
+							*ngIf="
+								signUpForm.submitted &&
+								signUpForm.controls.passwordComfirm?.invalid
+							"
+						>
+							<em
+								class="required-err"
+								*ngIf="
+									signUpForm.controls.passwordComfirm?.errors
+										.required
+								"
+								>Please fill out this filed!</em
+							>
+							<em
+								*ngIf="
+									signUpForm.controls.passwordComfirm?.errors
+										.mustMatch
+								"
+								>Passwords must match</em
+							>
+						</div>
+
+						<input
+							[(ngModel)]="passwordComfirm"
+							type="password"
+							name="passwordComfirm"
+							class="form-control"
+							placeholder="Confirm Password"
+							required
+						/>
+					</div>
+				</div>
+				<div class="row justify-content-start mt-4">
+					<div class="col">
+						<div class="form-check">
+							<label class="form-check-label">
+								<input
+									[(ngModel)]="acceptTerm"
+									type="checkbox"
+									name="acceptTerm"
+									class="form-check-input"
+									required
+								/>
+								I Read and Accept terms and Conditions
+							</label>
+						</div>
+						<button
+							[disabled]="!acceptTerm"
+							class="btn btn-primary mt-4"
+						>
+							Submit
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

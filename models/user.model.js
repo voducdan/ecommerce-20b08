@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
 	firstname: {
@@ -109,11 +111,24 @@ userSchema.statics.getUsersInMonth = async function (month, year) {
 	return usersInMonth;
 };
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', async function (next) {
 	this.day = new Date().getDate();
 	this.month = new Date().getMonth() + 1;
 	this.year = new Date().getFullYear();
-	next();
+	if (!this.isModified('password')) return next();
+
+	const salt = await bcrypt.genSalt(10);
+	this.password = await bcrypt.hash(this.password, salt);
 });
+
+userSchema.methods.getSignedJWT = function () {
+	return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
+		expiresIn: process.env.JWT_EXPIRE,
+	});
+};
+
+userSchema.methods.checkPassword = async function (rawPassword) {
+	return await bcrypt.compare(rawPassword, this.password);
+};
 
 module.exports = mongoose.model('User', userSchema);
