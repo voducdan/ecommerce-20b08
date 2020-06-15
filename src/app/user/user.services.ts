@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import {
-	HttpClient,
-	HttpHeaders,
-	HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, of, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, catchError, tap } from 'rxjs/operators';
 
 import { GlobalVariables } from '../global/index';
 
@@ -22,27 +18,40 @@ const httpOptions = {
 export class UserService {
 	constructor(private http: HttpClient) {}
 
-	private handleError(error: HttpErrorResponse) {
-		if (error.error instanceof ErrorEvent) {
-			console.error('An error occurred:', error.error.message);
-		} else {
-			console.error(
-				`Backend returned code ${error.status}, ` +
-					`body was: ${error.error}`
-			);
-		}
-		return throwError('Something bad happened; please try again later.');
-	}
-
 	private extractData(res: Response) {
 		const body = res;
 		return body || {};
 	}
 
-	register(userDate): Observable<any> {
-		httpOptions.params = userDate;
+	private setToken(body) {
+		if (body.success) {
+			localStorage.setItem('token', body.token);
+		}
+	}
+
+	register(userData): Observable<any> {
+		httpOptions.params = userData;
 		return this.http
 			.post(GlobalVariables.apiURL + '/user', httpOptions)
-			.pipe(map(this.extractData), catchError(this.handleError));
+			.pipe(
+				map(this.extractData),
+				tap(this.setToken),
+				catchError((err) => {
+					return of(err);
+				})
+			);
+	}
+
+	login(account): Observable<any> {
+		httpOptions.params = account;
+		return this.http
+			.post(GlobalVariables.apiURL + '/user/auth', httpOptions)
+			.pipe(
+				map(this.extractData),
+				tap(this.setToken),
+				catchError((err) => {
+					return of(err);
+				})
+			);
 	}
 }

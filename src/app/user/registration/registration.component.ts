@@ -32,9 +32,10 @@ export class RegistrationComponent {
 	passwordComfirm: string;
 	acceptTerm: Boolean = false;
 	onSubmit() {
-		console.log(this.user);
 		this.userService.register(this.user).subscribe((res) => {
-			this.router.navigate(['courses']);
+			if (res.success) {
+				this.router.navigate(['courses']);
+			}
 		});
 	}
 }
