@@ -3,10 +3,9 @@
 	"version": "0.0.0",
 	"scripts": {
 		"ng": "ng",
-		"start": "ng build --prod && set NODE_ENV=production&&node server.js",
+		"start": "set NODE_ENV=production&&node server.js",
 		"server": "set NODE_ENV=development&&nodemon server.js",
 		"ng-dev": "ng serve",
-		"build": "ng build --prod",
 		"test": "ng test",
 		"lint": "ng lint",
 		"e2e": "ng e2e"
