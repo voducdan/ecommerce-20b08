@@ -36,6 +36,18 @@ const invoiceSchema = new mongoose.Schema({
 	payment_method: String,
 });
 
+invoiceSchema.pre('save', async function (next) {
+	if (!this.day) {
+		this.day = new Date().getDate();
+	}
+	if (!this.month) {
+		this.month = new Date().getMonth() + 1;
+	}
+	if (!this.year) {
+		this.year = new Date().getFullYear();
+	}
+});
+
 invoiceSchema.statics.getRevenueInDay = async function (day, month, year) {
 	const invoicesOfDay = await this.aggregate([
 		{
@@ -64,7 +76,15 @@ invoiceSchema.statics.getRevenueInMonth = async function (month, year) {
 				revenueInMonth: { $sum: '$total_price' },
 			},
 		},
+		{ $sort: { _id: 1 } },
 	]);
+	let ind = 0;
+	invoicesOfMonth.forEach((item, index) => {
+		for (let i = item._id - 1; i > ind; i--) {
+			invoicesOfMonth.splice(index, 0, { _id: i, revenueInMonth: 0 });
+		}
+		ind = item._id;
+	});
 	return invoicesOfMonth;
 };
 
@@ -79,7 +99,15 @@ invoiceSchema.statics.getRevenueInYear = async function (year) {
 				revenueInYear: { $sum: '$total_price' },
 			},
 		},
+		{ $sort: { _id: 1 } },
 	]);
+	let ind = 0;
+	invoicesOfMonth.forEach((item, index) => {
+		for (let i = item._id - 1; i > ind; i--) {
+			invoicesOfMonth.splice(index, 0, { _id: i, revenueInYear: 0 });
+		}
+		ind = item._id;
+	});
 	return invoicesOfMonth;
 };
 

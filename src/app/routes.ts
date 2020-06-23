@@ -1,11 +1,9 @@
 import { Routes } from '@angular/router';
 
-import { RevenueComponent } from './revenue/revenue.component';
 import { ProductComponent } from './products/products.component';
 
 export const appRoutes: Routes = [
 	{ path: '', redirectTo: '/courses', pathMatch: 'full' },
-	{ path: 'revenue', component: RevenueComponent },
 	{ path: 'courses', component: ProductComponent },
 	{
 		path: 'course/:courseId',
@@ -18,6 +16,13 @@ export const appRoutes: Routes = [
 		path: 'user',
 		loadChildren: () =>
 			import('./user/user.module').then((m) => m.UserModule),
+	},
+	{
+		path: 'dashboard',
+		loadChildren: () =>
+			import('./dashboard/dashboard.module').then(
+				(m) => m.DashBoardModule
+			),
 	},
 	{
 		path: '**',

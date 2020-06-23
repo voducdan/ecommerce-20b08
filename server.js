@@ -41,12 +41,11 @@ app.use(
 	'/course/:courseId',
 	express.static(path.join(__dirname, 'dist/Projects'))
 );
-app.use('/user', express.static(path.join(__dirname, 'dist/Projects')));
+app.use('/user/login', express.static(path.join(__dirname, 'dist/Projects')));
 app.use(
 	'/user/register',
 	express.static(path.join(__dirname, 'dist/Projects'))
 );
-app.use('/user/login', express.static(path.join(__dirname, 'dist/Projects')));
 // use router
 app.use('/api/v1/revenue', revenueRouter);
 app.use('/api/v1/statistics', statisticsRouter);

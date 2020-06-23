@@ -1,0 +1,164 @@
+<div>
+	<div class="row">
+		<div class="col-2" style="margin: 20px;">
+			<app-dashboard-left-menu></app-dashboard-left-menu>
+		</div>
+		<div class="col-9">
+			<div class="container">
+				<div class="row justify-content-around">
+					<div class="col-md-4">
+						<div class="box text-center">
+							<div class="info">
+								<h3>{{ numInvoicesInMonth }}</h3>
+								<span> Invoices this month</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="box text-center">
+							<div class="info">
+								<h3>{{ numInvoicesInYear }}</h3>
+								<span> Invoices this year</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<div style="display: block;" id="month-revenue">
+							<canvas
+								width="500"
+								height="400"
+								baseChart
+								[datasets]="revenueInMonthData"
+								[labels]="revenueInMonthLabels"
+								[colors]="lineChartColors"
+								[legend]="lineChartLegend"
+								[chartType]="lineChartType"
+								[options]="chartOptions"
+								[plugins]="lineChartPlugins"
+							>
+							</canvas>
+						</div>
+					</div>
+					<div class="col-6">
+						<div style="display: block;" id="year-revenue">
+							<canvas
+								width="500"
+								height="400"
+								baseChart
+								[datasets]="revenueInYearData"
+								[labels]="revenueInYearLabels"
+								[colors]="lineChartColors"
+								[legend]="lineChartLegend"
+								[chartType]="lineChartType"
+								[plugins]="lineChartPlugins"
+							>
+							</canvas>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<div style="display: block;" id="month-invoices">
+							<h5 class="mt-5">Invoices in month</h5>
+							<div
+								class="table-wrapper-scroll-y my-custom-scrollbar"
+							>
+								<table class="table table-striped mb-0">
+									<thead>
+										<tr>
+											<th scope="col">User</th>
+											<th scope="col">Courses</th>
+											<th scope="col">Total price</th>
+											<th scope="col">Created at</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr
+											*ngFor="
+												let invoice of invoicesOfMonth
+											"
+										>
+											<td>
+												{{ invoice.user.firstname }}
+												{{ invoice.user.lastname }}
+											</td>
+											<td>
+												<ul>
+													<li
+														*ngFor="
+															let course of invoice.course
+														"
+													>
+														{{ course.name }}
+													</li>
+												</ul>
+											</td>
+											<td>{{ invoice.total_price }}</td>
+											<td>
+												{{ invoice.day }}-{{
+													invoice.month
+												}}-{{ invoice.year }}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="col-6">
+						<div style="display: block;" id="year-invoices">
+							<h5 class="mt-5">Invoices in year</h5>
+							<div
+								class="table-wrapper-scroll-y my-custom-scrollbar"
+							>
+								<table
+									class="table table-bordered table-striped mb-0"
+								>
+									<thead>
+										<tr>
+											<th scope="col">User</th>
+											<th scope="col">Courses</th>
+											<th scope="col">Total price</th>
+											<th scope="col">Created at</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr
+											*ngFor="
+												let invoice of invoicesOfYear
+											"
+										>
+											<td>
+												{{ invoice.user.firstname }}
+												{{ invoice.user.lastname }}
+											</td>
+											<td>
+												<ul>
+													<li
+														*ngFor="
+															let course of invoice.course
+														"
+													>
+														{{ course.name }}
+													</li>
+												</ul>
+											</td>
+											<td>{{ invoice.total_price }}</td>
+											<td>
+												{{ invoice.day }}-{{
+													invoice.month
+												}}-{{ invoice.year }}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

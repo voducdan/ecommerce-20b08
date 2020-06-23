@@ -13,23 +13,19 @@ module.exports = async (req, res, next) => {
 			month: new Date().getMonth() + 1,
 			year: new Date().getFullYear(),
 		};
-		const invoicesOfDay = await Invoice.find({
-			day: date.day,
-			month: date.month,
-			year: date.year,
-		});
 		const invoicesOfMonth = await Invoice.find({
 			year: date.year,
 			month: date.month,
-		});
+		})
+			.select('user course total_price day month year')
+			.populate('user', 'lastname firstname')
+			.populate('course', 'name');
 		const invoicesOfYear = await Invoice.find({
 			year: date.year,
-		});
-		const revenueOfDay = await Invoice.getRevenueInDay(
-			date.day,
-			date.month,
-			date.year
-		);
+		})
+			.select('user course total_price day month year')
+			.populate('user', 'lastname firstname')
+			.populate('course', 'name');
 		const revenueOfMonth = await Invoice.getRevenueInMonth(
 			date.month,
 			date.year
@@ -39,10 +35,8 @@ module.exports = async (req, res, next) => {
 		return res.status(200).json({
 			success: true,
 			data: {
-				invoicesOfDay,
 				invoicesOfMonth,
 				invoicesOfYear,
-				revenueOfDay,
 				revenueOfMonth,
 				revenueOfYear,
 			},
