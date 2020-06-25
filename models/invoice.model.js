@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const Course = require('./course.model');
-const category = require('./category.model');
+
 const invoiceSchema = new mongoose.Schema({
 	course: {
 		type: [
@@ -48,23 +47,6 @@ invoiceSchema.pre('save', async function (next) {
 	}
 });
 
-invoiceSchema.statics.getRevenueInDay = async function (day, month, year) {
-	const invoicesOfDay = await this.aggregate([
-		{
-			$match: { day, month, year },
-		},
-		{
-			$group: {
-				_id: {
-					$dateToString: { format: '%Y-%m-%d', date: '$create_at' },
-				},
-				revenueInDay: { $sum: '$total_price' },
-			},
-		},
-	]);
-	return invoicesOfDay;
-};
-
 invoiceSchema.statics.getRevenueInMonth = async function (month, year) {
 	const invoicesOfMonth = await this.aggregate([
 		{
@@ -109,6 +91,99 @@ invoiceSchema.statics.getRevenueInYear = async function (year) {
 		ind = item._id;
 	});
 	return invoicesOfMonth;
+};
+
+invoiceSchema.statics.getTotalRevenueInMonth = async function (month, year) {
+	const totalMonth = await this.aggregate([
+		{
+			$match: { month, year },
+		},
+		{
+			$group: {
+				_id: null,
+				totalMonth: { $sum: '$total_price' },
+			},
+		},
+		{ $sort: { _id: 1 } },
+	]);
+	return totalMonth;
+};
+
+invoiceSchema.statics.getTotalRevenueInYear = async function (year) {
+	const totalYear = await this.aggregate([
+		{
+			$match: { year },
+		},
+		{
+			$group: {
+				_id: null,
+				totalYear: { $sum: '$total_price' },
+			},
+		},
+		{ $sort: { _id: 1 } },
+	]);
+	return totalYear;
+};
+
+invoiceSchema.statics.invoicesOfMonth = async function (month, year) {
+	const countInvoicesOfMonth = await this.aggregate([
+		{
+			$match: {
+				month,
+				year,
+			},
+		},
+		{
+			$unwind: {
+				path: '$day',
+			},
+		},
+		{
+			$group: {
+				_id: '$day',
+				count: { $sum: 1 },
+			},
+		},
+		{ $sort: { _id: 1 } },
+	]);
+	let ind = 0;
+	countInvoicesOfMonth.forEach((item, index) => {
+		for (let i = item._id - 1; i > ind; i--) {
+			countInvoicesOfMonth.splice(index, 0, { _id: i, count: 0 });
+		}
+		ind = item._id;
+	});
+	return countInvoicesOfMonth;
+};
+
+invoiceSchema.statics.invoicesOfYear = async function (year) {
+	const countInvoicesOfYear = await this.aggregate([
+		{
+			$match: {
+				year,
+			},
+		},
+		{
+			$unwind: {
+				path: '$month',
+			},
+		},
+		{
+			$group: {
+				_id: '$month',
+				count: { $sum: 1 },
+			},
+		},
+		{ $sort: { _id: 1 } },
+	]);
+	let ind = 0;
+	countInvoicesOfYear.forEach((item, index) => {
+		for (let i = item._id - 1; i > ind; i--) {
+			countInvoicesOfYear.splice(index, 0, { _id: i, count: 0 });
+		}
+		ind = item._id;
+	});
+	return countInvoicesOfYear;
 };
 
 module.exports = mongoose.model('Invoice', invoiceSchema);

@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Router } from '@angular/router';
 
 import { Color, Label } from 'ng2-charts';
 
@@ -12,20 +13,60 @@ import { RevenueService } from './revenue.services';
 })
 export class RevenueComponent {
 	public revenueInMonthData: ChartDataSets[] = [
-		{ data: [], label: 'Revenue Of Month' },
+		{ data: [], label: 'Revenue Of Month', yAxisID: 'A' },
+		{
+			data: [],
+			label: 'Invoices Of Month',
+			yAxisID: 'B',
+			type: 'bar',
+			backgroundColor: '#ea65da',
+		},
 	];
 	public revenueInMonthLabels: Label[] = [];
 
 	public revenueInYearData: ChartDataSets[] = [
-		{ data: [], label: 'Revenue Of Year' },
+		{ data: [], label: 'Revenue Of Year', yAxisID: 'A' },
+		{
+			data: [],
+			label: 'Invoices Of Year',
+			yAxisID: 'B',
+			type: 'bar',
+			backgroundColor: '#ea65da',
+		},
+	];
+	public revenueInYearLabels: Label[] = [];
+
+	public revenueByCategoryData: ChartDataSets[] = [
+		{ data: [], label: 'Revenue By Category' },
+	];
+	public revenueByCategoryLabels: Label[] = [];
+	public invoicesByCategoryData: ChartDataSets[] = [
+		{ data: [], label: 'Invoices By Category' },
 	];
 	public chartOptions: ChartOptions = {
+		responsive: true,
 		animation: {
 			duration: 1000,
 			easing: 'easeOutQuart',
 		},
+		scales: {
+			yAxes: [
+				{
+					id: 'A',
+					type: 'linear',
+					position: 'left',
+				},
+				{
+					id: 'B',
+					type: 'linear',
+					position: 'right',
+					ticks: {
+						beginAtZero: false,
+					},
+				},
+			],
+		},
 	};
-	public revenueInYearLabels: Label[] = [];
 
 	public lineChartColors: Color[] = [
 		{
@@ -33,37 +74,86 @@ export class RevenueComponent {
 			backgroundColor: '#eaf1f5',
 		},
 	];
+
+	public barChartColors: Color[] = [
+		{
+			borderColor: '#2376d0',
+			backgroundColor: '#97bbcd',
+		},
+	];
 	public lineChartLegend = true;
 	public lineChartType = 'line';
+	public barChartType = 'bar';
 	public lineChartPlugins = [];
 
 	numInvoicesInMonth: number;
 	numInvoicesInYear: number;
 	invoicesOfMonth;
 	invoicesOfYear;
-	constructor(private revenueService: RevenueService) {}
+	totalMonth: any;
+	totalYear: any;
+	categories: string[] = [];
+	months: number[] = [...Array(12).keys()];
+	constructor(
+		private revenueService: RevenueService,
+		private router: Router
+	) {}
 
 	ngOnInit() {
 		this.revenueService.getRevenue().subscribe(
 			(res) => {
+				if (!res.success && res.error === 'Unauthorized') {
+					return this.router.navigate(['dashboard/403']);
+				}
 				const {
 					revenueOfMonth,
 					revenueOfYear,
 					invoicesOfYear,
 					invoicesOfMonth,
+					totalMonth,
+					totalYear,
+					countInvoicesOfYear,
+					countInvoicesOfMonth,
 				} = res.data;
+				this.totalMonth = totalMonth[0];
+				this.totalYear = totalYear[0];
 				this.invoicesOfMonth = invoicesOfMonth;
 				this.numInvoicesInMonth = invoicesOfMonth.length;
 				revenueOfMonth.map((item) => {
 					this.revenueInMonthLabels.push(String(item._id));
 					this.revenueInMonthData[0].data.push(item.revenueInMonth);
 				});
+				countInvoicesOfMonth.map((item) => {
+					this.revenueInMonthData[1].data.push(item.count);
+				});
+
 				this.invoicesOfYear = invoicesOfYear;
 				this.numInvoicesInYear = invoicesOfYear.length;
 				revenueOfYear.map((item) => {
 					this.revenueInYearLabels.push(this.monthToText(item._id));
 					this.revenueInYearData[0].data.push(item.revenueInYear);
 				});
+				countInvoicesOfYear.map((item) => {
+					this.revenueInYearData[1].data.push(item.count);
+				});
+			},
+			(err) => {
+				console.log(err);
+			}
+		);
+		this.revenueService.getRevenueByCategory().subscribe(
+			(res) => {
+				const revenueOfCategory = res.data;
+				for (let item of Object.entries(revenueOfCategory)) {
+					this.revenueByCategoryLabels.push(String(item[0]));
+					this.categories.push(item[0]);
+					this.revenueByCategoryData[0].data.push(
+						Number(item[1]['revenue'])
+					);
+					this.invoicesByCategoryData[0].data.push(
+						Number(item[1]['count'])
+					);
+				}
 			},
 			(err) => {
 				console.log(err);
@@ -86,5 +176,42 @@ export class RevenueComponent {
 			'December',
 		];
 		return monthInText[month - 1];
+	}
+	monthSelected(month) {
+		this.revenueService.getInSingeMonthRevenue(month).subscribe(
+			(res) => {
+				const {
+					revenueOfMonth,
+					invoicesOfMonth,
+					totalMonth,
+					countInvoicesOfMonth,
+				} = res.data;
+				this.revenueInMonthData = [
+					{ data: [], label: 'Revenue Of Month', yAxisID: 'A' },
+					{
+						data: [],
+						label: 'Invoices Of Month',
+						yAxisID: 'B',
+						type: 'bar',
+						backgroundColor: '#ea65da',
+					},
+				];
+				this.revenueInMonthLabels = [];
+
+				this.totalMonth = totalMonth[0];
+				this.invoicesOfMonth = invoicesOfMonth;
+				this.numInvoicesInMonth = invoicesOfMonth.length;
+				revenueOfMonth.map((item) => {
+					this.revenueInMonthLabels.push(String(item._id));
+					this.revenueInMonthData[0].data.push(item.revenueInMonth);
+				});
+				countInvoicesOfMonth.map((item) => {
+					this.revenueInMonthData[1].data.push(item.count);
+				});
+			},
+			(err) => {
+				console.log(err);
+			}
+		);
 	}
 }

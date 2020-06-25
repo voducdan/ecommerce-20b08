@@ -73,12 +73,14 @@ const userSchema = new mongoose.Schema({
 			required: true,
 		},
 	}),
-	enrolled_courses: [
-		{
-			type: mongoose.Schema.ObjectId,
-			ref: 'Course',
-		},
-	],
+	enrolled_courses: {
+		type: [
+			{
+				type: mongoose.Schema.ObjectId,
+				ref: 'Course',
+			},
+		],
+	},
 	website: String,
 	create_at: {
 		type: Date,
@@ -107,14 +109,42 @@ userSchema.statics.getUsersInMonth = async function (month, year) {
 				count: { $sum: 1 },
 			},
 		},
+		{ $sort: { _id: 1 } },
 	]);
+	let ind = 0;
+	usersInMonth.forEach((item, index) => {
+		for (let i = item._id - 1; i > ind; i--) {
+			usersInMonth.splice(index, 0, { _id: i, count: 0 });
+		}
+		ind = item._id;
+	});
 	return usersInMonth;
 };
+userSchema.statics.getCountUsersInMonth = async function (month, year) {
+	const countUsersInMonth = await this.aggregate([
+		{
+			$match: { month, year },
+		},
+		{
+			$group: {
+				_id: 'null',
+				count: { $sum: 1 },
+			},
+		},
+	]);
 
+	return countUsersInMonth;
+};
 userSchema.pre('save', async function (next) {
-	this.day = new Date().getDate();
-	this.month = new Date().getMonth() + 1;
-	this.year = new Date().getFullYear();
+	if (!this.day) {
+		this.day = new Date().getDate();
+	}
+	if (!this.month) {
+		this.month = new Date().getMonth() + 1;
+	}
+	if (!this.year) {
+		this.year = new Date().getFullYear();
+	}
 	if (!this.isModified('password')) return next();
 
 	const salt = await bcrypt.genSalt(10);

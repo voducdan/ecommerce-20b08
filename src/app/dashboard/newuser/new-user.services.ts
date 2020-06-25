@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { AuthService } from '../shared/auth.services';
 
 import {
@@ -21,7 +20,7 @@ const httpOptions = {
 @Injectable({
 	providedIn: 'root',
 })
-export class RevenueService {
+export class NewuserService {
 	constructor(private http: HttpClient, private authService: AuthService) {}
 	private handleError(error: HttpErrorResponse) {
 		if (error.error instanceof ErrorEvent) {
@@ -39,8 +38,7 @@ export class RevenueService {
 		const body = res;
 		return body || {};
 	}
-
-	getRevenue(): Observable<any> {
+	getNewuserInMonth(): Observable<any> {
 		if (!httpOptions.headers.get('authorization')) {
 			httpOptions.headers = httpOptions.headers.append(
 				'authorization',
@@ -48,10 +46,10 @@ export class RevenueService {
 			);
 		}
 		return this.http
-			.get(GlobalVariables.apiURL + '/revenue/date', httpOptions)
+			.get(GlobalVariables.apiURL + '/statistics/newusers', httpOptions)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
-	getInSingeMonthRevenue(month): Observable<any> {
+	getNewuserInSingleMonth(month): Observable<any> {
 		if (!httpOptions.headers.get('authorization')) {
 			httpOptions.headers = httpOptions.headers.append(
 				'authorization',
@@ -60,20 +58,9 @@ export class RevenueService {
 		}
 		return this.http
 			.get(
-				GlobalVariables.apiURL + '/revenue/date?month=' + month,
+				GlobalVariables.apiURL + '/statistics/newusers?month=' + month,
 				httpOptions
 			)
-			.pipe(map(this.extractData), catchError(this.handleError));
-	}
-	getRevenueByCategory(): Observable<any> {
-		if (!httpOptions.headers.get('authorization')) {
-			httpOptions.headers = httpOptions.headers.append(
-				'authorization',
-				`Bearer ${this.authService.getToken()}`
-			);
-		}
-		return this.http
-			.get(GlobalVariables.apiURL + '/revenue/category', httpOptions)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
 }

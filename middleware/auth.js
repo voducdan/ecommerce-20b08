@@ -7,10 +7,7 @@ exports.authorize = (...roles) => {
 	return (req, res, next) => {
 		const userRole = req.user.role;
 		if (!roles.includes(userRole)) {
-			return next(
-				new errorResponse('Unauthorize to access this resource'),
-				403
-			);
+			return next(new errorResponse('Unauthorized'), 403);
 		}
 		next();
 	};
@@ -18,7 +15,6 @@ exports.authorize = (...roles) => {
 
 exports.checkToken = async (req, res, next) => {
 	let token;
-
 	if (
 		req.headers.authorization &&
 		req.headers.authorization.startsWith('Bearer')
@@ -27,9 +23,7 @@ exports.checkToken = async (req, res, next) => {
 	}
 
 	if (!token) {
-		return next(
-			new errorResponse('Not authorized to access this route', 401)
-		);
+		return next(new errorResponse('Unauthenticated', 401));
 	}
 
 	try {

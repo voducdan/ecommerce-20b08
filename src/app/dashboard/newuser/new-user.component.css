@@ -1,0 +1,41 @@
+p {
+	font-family: Lato;
+}
+
+.navbar {
+	border-radius: 0;
+	background-color: #fff;
+}
+
+.container {
+	margin: 0;
+}
+.panel-default {
+	border-color: #ddd;
+}
+
+.box {
+	background-color: #fdf5f5;
+	padding: 15px;
+	overflow: hidden;
+}
+
+.box .info h3 {
+	margin: 5px 0 5px;
+	display: inline-block;
+}
+
+.box .info p {
+	color: #bbb;
+}
+
+.my-custom-scrollbar {
+	position: relative;
+	height: 500px;
+	margin-bottom: 10px;
+	overflow: auto;
+	border: 1px solid #dee2e6;
+}
+.table-wrapper-scroll-y {
+	display: block;
+}

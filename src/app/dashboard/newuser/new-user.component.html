@@ -1,0 +1,139 @@
+<div>
+	<div class="row">
+		<div class="col-2" style="margin: 20px;">
+			<app-dashboard-left-menu></app-dashboard-left-menu>
+		</div>
+		<div class="col-9">
+			<div class="container">
+				<div class="py-2 mt-4 mb-2 border-bottom bg-primary text-white">
+					<h4 class="pl-2">Registered user</h4>
+				</div>
+				<div class="row justify-content-around">
+					<div class="col-md-4">
+						<div class="box text-center">
+							<div class="info">
+								<h3>
+									{{ countUserInMonth }}
+								</h3>
+								<span> New users this month</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<span><b>Select month</b></span>
+						<select
+							*ngIf="usersInMonth"
+							class="form-control"
+							style="width: 100%;"
+							id="gender2"
+							(change)="monthSelected($event.target.value)"
+						>
+							<option
+								[attr.selected]="
+									month + 1 === usersInMonth[0]?.month
+										? 'selected'
+										: null
+								"
+								*ngFor="let month of months"
+								[value]="month + 1"
+								>{{ month + 1 }}</option
+							>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<div style="display: block;" id="month-revenue">
+							<canvas
+								width="500"
+								height="400"
+								baseChart
+								[datasets]="newUserInMonthData"
+								[labels]="newUserInMonthInMonthLabels"
+								[colors]="lineChartColors"
+								[legend]="lineChartLegend"
+								[chartType]="lineChartType"
+								[options]="chartOptions"
+								[plugins]="lineChartPlugins"
+							>
+							</canvas>
+						</div>
+					</div>
+					<div class="col-6">
+						<div style="display: block;" id="month-revenue">
+							<canvas
+								width="500"
+								height="400"
+								baseChart
+								[datasets]="newUserInMonthData"
+								[labels]="newUserInMonthInMonthLabels"
+								[colors]="barChartColors"
+								[legend]="lineChartLegend"
+								[chartType]="barChartType"
+								[options]="chartOptions"
+								[plugins]="lineChartPlugins"
+							>
+							</canvas>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div style="display: block;" id="month-invoices">
+							<h5>Registered User in month</h5>
+							<div
+								class="table-wrapper-scroll-y my-custom-scrollbar"
+							>
+								<table class="table table-striped mb-0">
+									<thead>
+										<tr>
+											<th style="width: 15%;" scope="col">
+												Name
+											</th>
+											<th style="width: 20%;" scope="col">
+												Email
+											</th>
+											<th style="width: 50%;" scope="col">
+												Enrolled courses
+											</th>
+											<th style="width: 15%;" scope="col">
+												Created at
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let user of usersInMonth">
+											<td>
+												{{ user.firstname }}
+												{{ user.lastname }}
+											</td>
+											<td>
+												{{ user.email }}
+											</td>
+											<td>
+												<ul>
+													<li
+														*ngFor="
+															let course of user.enrolled_courses
+														"
+													>
+														{{ course.name }}
+													</li>
+												</ul>
+											</td>
+											<td>
+												{{ user.day }}-{{
+													user.month
+												}}-{{ user.year }}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

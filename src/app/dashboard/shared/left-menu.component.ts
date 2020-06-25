@@ -1,25 +1,9 @@
 import { Component } from '@angular/core';
-import { ClassMethod } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-dashboard-left-menu',
-	template: `<div class="card">
-		<div class="card-header">
-			<a href="#">Revenue</a>
-		</div>
-
-		<div class="card-body">
-			<a href="#">New user</a>
-		</div>
-
-		<div class="card-body">
-			<a href="#">Product management</a>
-		</div>
-
-		<div class="card-body">
-			<a href="#">User management</a>
-		</div>
-	</div>`,
+	templateUrl: './left-menu.component.html',
 	styles: [
 		`
 			:host {
@@ -37,4 +21,14 @@ import { ClassMethod } from '@angular/compiler';
 		`,
 	],
 })
-export class DashboardLeftMenu {}
+export class DashboardLeftMenu {
+	isActive: number;
+	constructor(private route: Router) {}
+	ngOnInit() {
+		if (this.route.url.includes('newuser')) {
+			this.isActive = 2;
+		} else if (this.route.url.includes('revenue')) {
+			this.isActive = 1;
+		}
+	}
+}

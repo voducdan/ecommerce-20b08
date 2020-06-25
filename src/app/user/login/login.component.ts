@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from '../user.services';
 @Component({
@@ -9,7 +9,11 @@ import { UserService } from '../user.services';
 	styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-	constructor(private userService: UserService, private router: Router) {}
+	constructor(
+		private userService: UserService,
+		private router: Router,
+		private route: ActivatedRoute
+	) {}
 
 	loginForm = new FormGroup({
 		email: new FormControl('', [Validators.required, Validators.email]),
@@ -20,10 +24,21 @@ export class LoginComponent {
 	});
 	loginSuccess: Boolean = true;
 	loginErr: string;
+	redirectURL: string;
 	onSubmit() {
 		this.userService.login(this.loginForm.value).subscribe((res) => {
 			if (res.success) {
-				this.router.navigate(['courses']);
+				let params = this.route.snapshot['queryParams'];
+				if (params['redirectURL']) {
+					this.redirectURL = params['redirectURL'];
+				}
+				if (this.redirectURL) {
+					this.router
+						.navigateByUrl(this.redirectURL)
+						.catch(() => this.router.navigate(['courses']));
+				} else {
+					this.router.navigate(['courses']);
+				}
 			} else {
 				this.loginSuccess = false;
 				this.loginErr = res.error.error;

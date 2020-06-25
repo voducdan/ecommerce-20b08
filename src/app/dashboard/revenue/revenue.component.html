@@ -5,6 +5,9 @@
 		</div>
 		<div class="col-9">
 			<div class="container">
+				<div class="py-2 mt-4 mb-2 border-bottom bg-primary text-white">
+					<h4 class="pl-2">Revenue by date</h4>
+				</div>
 				<div class="row justify-content-around">
 					<div class="col-md-4">
 						<div class="box text-center">
@@ -12,13 +15,48 @@
 								<h3>{{ numInvoicesInMonth }}</h3>
 								<span> Invoices this month</span>
 							</div>
+							<div class="total">
+								<span
+									><b
+										>Total {{ totalMonth?.totalMonth }}$</b
+									></span
+								>
+							</div>
 						</div>
+					</div>
+					<div class="col-md-2">
+						<h6>Select month</h6>
+						<select
+							*ngIf="invoicesOfMonth"
+							class="form-control"
+							style="width: 100%;"
+							id="gender2"
+							(change)="monthSelected($event.target.value)"
+						>
+							<option
+								[attr.selected]="
+									month + 1 === invoicesOfMonth[0]?.month
+										? 'selected'
+										: null
+								"
+								*ngFor="let month of months"
+								[value]="month + 1"
+								>{{ month + 1 }}</option
+							>
+						</select>
 					</div>
 					<div class="col-md-4">
 						<div class="box text-center">
 							<div class="info">
 								<h3>{{ numInvoicesInYear }}</h3>
 								<span> Invoices this year</span>
+							</div>
+							<div class="total">
+								<span
+									><b
+										>Total {{ totalYear?.totalYear }}$</b
+									></span
+								>
 							</div>
 						</div>
 					</div>
@@ -52,6 +90,7 @@
 								[colors]="lineChartColors"
 								[legend]="lineChartLegend"
 								[chartType]="lineChartType"
+								[options]="chartOptions"
 								[plugins]="lineChartPlugins"
 							>
 							</canvas>
@@ -155,6 +194,45 @@
 									</tbody>
 								</table>
 							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container" class="mb-5">
+				<div class="py-2 mt-4 mb-2 border-bottom bg-primary text-white">
+					<h4 class="pl-2">Revenue by category</h4>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<div style="display: block;" id="year-revenue">
+							<canvas
+								width="500"
+								height="400"
+								baseChart
+								[datasets]="revenueByCategoryData"
+								[labels]="revenueByCategoryLabels"
+								[colors]="barChartColors"
+								[legend]="lineChartLegend"
+								[chartType]="barChartType"
+								[plugins]="lineChartPlugins"
+							>
+							</canvas>
+						</div>
+					</div>
+					<div class="col-6">
+						<div style="display: block;" id="year-revenue">
+							<canvas
+								width="500"
+								height="400"
+								baseChart
+								[datasets]="invoicesByCategoryData"
+								[labels]="revenueByCategoryLabels"
+								[colors]="barChartColors"
+								[legend]="lineChartLegend"
+								[chartType]="lineChartType"
+								[plugins]="lineChartPlugins"
+							>
+							</canvas>
 						</div>
 					</div>
 				</div>

@@ -30,7 +30,7 @@ export class ProductDetailService {
 					`body was: ${error.error}`
 			);
 		}
-		return throwError('Something bad happened; please try again later.');
+		return of(error.error);
 	}
 
 	private extractData(res: Response) {
