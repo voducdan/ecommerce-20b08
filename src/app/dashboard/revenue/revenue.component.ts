@@ -37,11 +37,11 @@ export class RevenueComponent {
 	public revenueInYearLabels: Label[] = [];
 
 	public revenueByCategoryData: ChartDataSets[] = [
-		{ data: [], label: 'Revenue By Category' },
+		{ data: [], label: 'Revenue By Category, total:' },
 	];
 	public revenueByCategoryLabels: Label[] = [];
 	public invoicesByCategoryData: ChartDataSets[] = [
-		{ data: [], label: 'Invoices By Category' },
+		{ data: [], label: 'Invoices By Category total:' },
 	];
 	public chartOptions: ChartOptions = {
 		responsive: true,

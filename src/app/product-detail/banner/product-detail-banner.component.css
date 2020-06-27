@@ -39,7 +39,7 @@
 .more-caption:hover .more-caption-box {
 	display: flex;
 	flex-direction: column;
-	z-index: 20;
+	z-index: 30;
 }
 
 .more-caption-box {

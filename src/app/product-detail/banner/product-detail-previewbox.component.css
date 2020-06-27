@@ -111,3 +111,9 @@
 .share-course:hover {
 	color: rgb(19, 32, 32);
 }
+
+@media only screen and (max-width: 990px) {
+	.preview-box-inside {
+		display: none;
+	}
+}

@@ -15,12 +15,20 @@ module.exports = async (req, res, next) => {
 		);
 		const numOfUsersInMonth = await User.getUsersInMonth(month, year);
 		const countUserInMonth = await User.getCountUsersInMonth(month, year);
+		const usersInYear = await User.find({ year }).populate(
+			'enrolled_courses'
+		);
+		const numOfUsersInYear = await User.getUsersInYear(year);
+		const countUserInYear = await User.getCountUsersInYear(year);
 		return res.json({
 			success: true,
 			data: {
 				usersInMonth,
 				numOfUsersInMonth,
 				countUserInMonth,
+				usersInYear,
+				numOfUsersInYear,
+				countUserInYear,
 			},
 		});
 	}

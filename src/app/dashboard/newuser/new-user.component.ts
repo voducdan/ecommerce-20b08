@@ -14,6 +14,10 @@ export class NewuserComponent {
 		{ data: [], label: 'New user in month' },
 	];
 	public newUserInMonthInMonthLabels: Label[] = [];
+	public newUserInYearData: ChartDataSets[] = [
+		{ data: [], label: 'New user in year' },
+	];
+	public newUserInYearLabels: Label[] = [];
 
 	public chartOptions: ChartOptions = {
 		responsive: true,
@@ -29,20 +33,17 @@ export class NewuserComponent {
 			backgroundColor: '#eaf1f5',
 		},
 	];
-	public barChartColors: Color[] = [
-		{
-			borderColor: '#2376d0',
-			backgroundColor: '#97bbcd',
-		},
-	];
+
 	public lineChartLegend = true;
 	public lineChartType = 'line';
-	public barChartType = 'bar';
 	public lineChartPlugins = [];
 
 	usersInMonth: any;
 	numOfUsersInMonth: any;
 	countUserInMonth: number;
+	usersInYear: any;
+	numOfUsersInYear: any;
+	countUserInYear: number;
 	months: number[] = [...Array(12).keys()];
 	constructor(
 		private router: Router,
@@ -57,9 +58,16 @@ export class NewuserComponent {
 			this.usersInMonth = res.data['usersInMonth'];
 			this.numOfUsersInMonth = res.data['numOfUsersInMonth'];
 			this.countUserInMonth = res.data['countUserInMonth'][0].count;
+			this.usersInYear = res.data['usersInYear'];
+			this.numOfUsersInYear = res.data['numOfUsersInYear'];
+			this.countUserInYear = res.data['countUserInYear'][0].count;
 			this.numOfUsersInMonth.map((item) => {
 				this.newUserInMonthInMonthLabels.push(String(item._id));
 				this.newUserInMonthData[0].data.push(item.count);
+			});
+			this.numOfUsersInYear.map((item) => {
+				this.newUserInYearLabels.push(String(item._id));
+				this.newUserInYearData[0].data.push(item.count);
 			});
 		});
 	}

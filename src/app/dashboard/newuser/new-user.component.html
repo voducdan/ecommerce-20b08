@@ -1,15 +1,15 @@
 <div>
 	<div class="row">
-		<div class="col-2" style="margin: 20px;">
+		<div class="col-lg-2 col-sm-12" style="margin: 20px;">
 			<app-dashboard-left-menu></app-dashboard-left-menu>
 		</div>
-		<div class="col-9">
+		<div class="col-lg-9 col-sm-12">
 			<div class="container">
 				<div class="py-2 mt-4 mb-2 border-bottom bg-primary text-white">
 					<h4 class="pl-2">Registered user</h4>
 				</div>
 				<div class="row justify-content-around">
-					<div class="col-md-4">
+					<div class="col-lg-4 col-sm-12 mt-3">
 						<div class="box text-center">
 							<div class="info">
 								<h3>
@@ -19,7 +19,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-lg-2 col-sm-12 my-3">
 						<span><b>Select month</b></span>
 						<select
 							*ngIf="usersInMonth"
@@ -40,9 +40,19 @@
 							>
 						</select>
 					</div>
+					<div class="col-lg-4 col-sm-12 mt-3">
+						<div class="box text-center">
+							<div class="info">
+								<h3>
+									{{ countUserInYear }}
+								</h3>
+								<span> New users this year</span>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="row">
-					<div class="col-6">
+					<div class="col-lg-6 col-sm-12">
 						<div style="display: block;" id="month-revenue">
 							<canvas
 								width="500"
@@ -59,17 +69,17 @@
 							</canvas>
 						</div>
 					</div>
-					<div class="col-6">
+					<div class="col-lg-6 col-sm-12">
 						<div style="display: block;" id="month-revenue">
 							<canvas
 								width="500"
 								height="400"
 								baseChart
-								[datasets]="newUserInMonthData"
-								[labels]="newUserInMonthInMonthLabels"
-								[colors]="barChartColors"
+								[datasets]="newUserInYearData"
+								[labels]="newUserInYearLabels"
+								[colors]="lineChartColors"
 								[legend]="lineChartLegend"
-								[chartType]="barChartType"
+								[chartType]="lineChartType"
 								[options]="chartOptions"
 								[plugins]="lineChartPlugins"
 							>

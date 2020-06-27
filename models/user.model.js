@@ -120,6 +120,28 @@ userSchema.statics.getUsersInMonth = async function (month, year) {
 	});
 	return usersInMonth;
 };
+userSchema.statics.getUsersInYear = async function (year) {
+	const usersInYear = await this.aggregate([
+		{
+			$match: { year },
+		},
+		{
+			$group: {
+				_id: '$month',
+				count: { $sum: 1 },
+			},
+		},
+		{ $sort: { _id: 1 } },
+	]);
+	let ind = 0;
+	usersInYear.forEach((item, index) => {
+		for (let i = item._id - 1; i > ind; i--) {
+			usersInYear.splice(index, 0, { _id: i, count: 0 });
+		}
+		ind = item._id;
+	});
+	return usersInYear;
+};
 userSchema.statics.getCountUsersInMonth = async function (month, year) {
 	const countUsersInMonth = await this.aggregate([
 		{
@@ -134,6 +156,21 @@ userSchema.statics.getCountUsersInMonth = async function (month, year) {
 	]);
 
 	return countUsersInMonth;
+};
+userSchema.statics.getCountUsersInYear = async function (year) {
+	const countUsersInYear = await this.aggregate([
+		{
+			$match: { year },
+		},
+		{
+			$group: {
+				_id: 'null',
+				count: { $sum: 1 },
+			},
+		},
+	]);
+
+	return countUsersInYear;
 };
 userSchema.pre('save', async function (next) {
 	if (!this.day) {

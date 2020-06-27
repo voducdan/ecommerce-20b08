@@ -27,7 +27,9 @@
 			'card-body': true
 		}"
 	>
-		<a (click)="isActive = 3" href="#">Product management</a>
+		<a (click)="isActive = 3" [routerLink]="['/dashboard/products']"
+			>Product management</a
+		>
 	</div>
 
 	<div
