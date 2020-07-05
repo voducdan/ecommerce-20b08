@@ -41,11 +41,14 @@ app.use(
 	'/course/:courseId',
 	express.static(path.join(__dirname, 'dist/Projects'))
 );
+app.use('/user', express.static(path.join(__dirname, 'dist/Projects')));
 app.use('/user/login', express.static(path.join(__dirname, 'dist/Projects')));
 app.use(
 	'/user/register',
 	express.static(path.join(__dirname, 'dist/Projects'))
 );
+app.use('/user/profile', express.static(path.join(__dirname, 'dist/Projects')));
+app.use('/user/account', express.static(path.join(__dirname, 'dist/Projects')));
 app.use('/dashboard', express.static(path.join(__dirname, 'dist/Projects')));
 app.use(
 	'/dashboard/revenue',
