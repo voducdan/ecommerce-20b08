@@ -1,11 +1,13 @@
 import { IProduct } from './products.model';
 export interface IUser {
+	_id: string;
 	firstname: string;
 	lastname: string;
 	headline?: string;
 	image?: string;
 	email: string;
 	password: string;
+	role: string;
 	payment?: {
 		name_on_card: string;
 		card_number: string;

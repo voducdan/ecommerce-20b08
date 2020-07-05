@@ -1,0 +1,234 @@
+<div class="container">
+	<div class="row flex-lg-nowrap">
+		<div class="col-lg-2 col-sm-12" style="margin: 20px;">
+			<app-user-left-menu></app-user-left-menu>
+		</div>
+
+		<div class="col">
+			<div class="row">
+				<div class="col mb-3">
+					<div class="card">
+						<div class="card-body">
+							<div *ngIf="user" class="e-profile">
+								<div class="row">
+									<div
+										*ngIf="!user.image"
+										class="col-12 col-sm-auto mb-3"
+									>
+										<div
+											class="mx-auto"
+											style="width: 140px;"
+										>
+											<div
+												class="d-flex justify-content-center align-items-center rounded"
+												style="
+													height: 140px;
+													background-color: rgb(
+														233,
+														236,
+														239
+													);
+												"
+											></div>
+										</div>
+									</div>
+									<div *ngIf="user.image" class="avt">
+										<img
+											*ngIf="!previewImage; else preview"
+											[src]="user.image"
+											alt="avt"
+											class="avt-image"
+										/>
+										<ng-template #preview>
+											<img
+												[src]="previewImage"
+												alt="avt"
+												class="avt-image"
+											/>
+										</ng-template>
+									</div>
+									<div
+										class="col d-flex flex-column flex-sm-row justify-content-between mb-3"
+									>
+										<div
+											class="text-center text-sm-left mb-2 mb-sm-0"
+										>
+											<h4
+												class="pt-sm-2 pb-1 mb-0 text-nowrap"
+											>
+												{{ user.firstname }}
+												{{ user.lastname }}
+											</h4>
+
+											<div class="mt-2">
+												<form
+													#profile="ngForm"
+													(ngSubmit)="updateAvt()"
+													class="form"
+												>
+													<div class="form-group">
+														<label for="avt">{{
+															user.image
+																? 'Change avartar'
+																: 'Upload avartar'
+														}}</label>
+														<p
+															*ngIf="avtUploadErr"
+															style="
+																color: red;
+																font-size: 13px;
+															"
+														>
+															{{ avtUploadErr }}
+														</p>
+														<input
+															class="form-control"
+															(change)="
+																onAvtChange(
+																	$event
+																)
+															"
+															type="file"
+															name="avt"
+															id="avt"
+														/>
+													</div>
+
+													<div class="row">
+														<div
+															class="col d-flex justify-content-start mt-2"
+														>
+															<button
+																class="btn btn-primary"
+																type="submit"
+																[disabled]="
+																	avtUploadErr
+																"
+															>
+																Upload
+															</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										<div class="text-center text-sm-right">
+											<span
+												class="badge badge-secondary"
+												>{{ user.role }}</span
+											>
+											<div class="text-muted">
+												<small
+													>Joined
+													{{
+														user.create_at
+															| date: 'fullDate'
+													}}</small
+												>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="tab-content pt-3">
+									<div class="tab-pane active">
+										<form
+											[formGroup]="profileForm"
+											#profile="ngForm"
+											(ngSubmit)="onSubmit()"
+											class="form"
+											novalidate=""
+										>
+											<div class="row">
+												<div class="col">
+													<div class="row">
+														<div class="col">
+															<div
+																class="form-group"
+															>
+																<label
+																	>Firstname
+																	Name</label
+																>
+																<input
+																	class="form-control"
+																	formControlName="firstname"
+																	type="text"
+																	name="name"
+																/>
+															</div>
+														</div>
+														<div class="col">
+															<div
+																class="form-group"
+															>
+																<label
+																	>Lastname</label
+																>
+																<input
+																	formControlName="lastname"
+																	class="form-control"
+																	type="text"
+																	name="lastname"
+																/>
+															</div>
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="col">
+															<div
+																class="form-group"
+															>
+																<label
+																	>Headline</label
+																>
+																<input
+																	class="form-control"
+																	type="text"
+																	formControlName="headline"
+																/>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col">
+															<div
+																class="form-group"
+															>
+																<label
+																	>Website</label
+																>
+																<input
+																	formControlName="website"
+																	class="form-control"
+																	type="text"
+																/>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div
+													class="col d-flex justify-content-center"
+												>
+													<button
+														class="btn btn-primary"
+														type="submit"
+													>
+														Save
+													</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

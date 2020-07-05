@@ -24,10 +24,12 @@ export class RegistrationComponent {
 	constructor(private router: Router, private userService: UserService) {}
 
 	user: IUser = {
-		firstname: '',
+		_id: '',
 		lastname: '',
+		firstname: '',
 		password: '',
 		email: '',
+		role: '',
 	};
 	passwordComfirm: string;
 	acceptTerm: Boolean = false;

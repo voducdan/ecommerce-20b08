@@ -30,5 +30,6 @@ import { ForbiddenComponent } from './shared/forbidden/forbidden.component';
 		CKEditorModule,
 		RouterModule.forChild(dashboardRoutes),
 	],
+	exports: [DashboardLeftMenu],
 })
 export class DashBoardModule {}

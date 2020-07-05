@@ -21,7 +21,13 @@ export class ProductManagementComponent {
 			});
 		});
 	}
-	deleteCourse(courseId) {}
+	deleteCourse(courseId) {
+		this.productService.deleteProduct(courseId).subscribe((res) => {
+			this.products = this.products.filter(
+				(item) => item._id !== courseId
+			);
+		});
+	}
 
 	editCourse(courseId) {}
 

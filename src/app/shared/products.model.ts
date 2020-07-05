@@ -3,6 +3,7 @@ import { ITopic } from './topic.model';
 import { IAuthor } from './author.model';
 
 export interface IProduct {
+	_id: string;
 	name: string;
 	url: string;
 	author: IAuthor;

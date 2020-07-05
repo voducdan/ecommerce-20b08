@@ -1,0 +1,47 @@
+<div class="card">
+	<div
+		[ngClass]="{
+			'card-header': isActive === 1,
+			'card-body': true
+		}"
+	>
+		<a (click)="isActive = 1" [routerLink]="['/user/profile']">Profile</a>
+	</div>
+
+	<div
+		[ngClass]="{
+			'card-header': isActive === 2,
+			'card-body': true
+		}"
+	>
+		<a (click)="isActive = 2" [routerLink]="['/user/account']">Account</a>
+	</div>
+
+	<div
+		[ngClass]="{
+			'card-header': isActive === 3,
+			'card-body': true
+		}"
+	>
+		<a (click)="isActive = 3" [routerLink]="['/user/payment-method']"
+			>Payment method</a
+		>
+	</div>
+
+	<div
+		[ngClass]="{
+			'card-header': isActive === 4,
+			'card-body': true
+		}"
+	>
+		<a (click)="isActive = 4" href="#">My courses</a>
+	</div>
+	<div
+		[ngClass]="{
+			'card-header': isActive === 4,
+			'card-body': true
+		}"
+	>
+		<a (click)="isActive = 4" href="#">Close account</a>
+	</div>
+</div>

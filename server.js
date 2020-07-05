@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
+
 const dotenv = require('dotenv');
 dotenv.config({ path: './config/config.env' });
 
@@ -23,7 +24,7 @@ connectDB();
 app.use(cors());
 app.use(
 	express.json({
-		limit: '10kb',
+		limit: '1024kb',
 	})
 );
 
