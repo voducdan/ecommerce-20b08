@@ -58,6 +58,10 @@ app.use(
 	'/dashboard/newuser',
 	express.static(path.join(__dirname, 'dist/Projects'))
 );
+app.use(
+	'/dashboard/producsts',
+	express.static(path.join(__dirname, 'dist/Projects'))
+);
 // use router
 app.use('/api/v1/revenue', revenueRouter);
 app.use('/api/v1/statistics', statisticsRouter);

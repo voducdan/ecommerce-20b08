@@ -20,5 +20,6 @@ connectDB = () => {
 			console.log(`Connect mongodb succesful on ${conn.connection.host}`)
 		)
 		.catch((err) => console.error(err));
+	mongoose.set('useFindAndModify', false);
 };
 module.exports = connectDB;

@@ -8,13 +8,17 @@ import { appRoutes } from './routes';
 import { AppComponent } from './app.component';
 import { ProductComponent } from './products/products.component';
 import { SharedModule } from './shared/shared.module';
+import {NavBarComponent} from './narBar/navbar.component';
+import {AboutComponent} from './about-us/about.component';
+
 @NgModule({
-	declarations: [AppComponent, ProductComponent],
+	declarations: [AppComponent, ProductComponent, NavBarComponent, AboutComponent
+	],
 	imports: [
 		RouterModule.forRoot(appRoutes),
 		BrowserModule,
 		HttpClientModule,
-		SharedModule,
+		SharedModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],

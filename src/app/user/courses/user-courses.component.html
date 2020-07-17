@@ -1,0 +1,142 @@
+<div class="container">
+	<div class="row flex-lg-nowrap">
+		<div class="col-lg-2 col-sm-12" style="margin: 20px;">
+			<app-user-left-menu></app-user-left-menu>
+		</div>
+		<div class="col">
+			<div class="row">
+				<div class="col mb-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="e-profile">
+								<div class="header">
+									<div class="overview">
+										<h6 class="px-4">Course Overview</h6>
+									</div>
+								</div>
+								<div class="container products">
+									<div class="row">
+										<div class="col-lg-5 col-sm-9 mb-3">
+											<div class="search-course">
+												<div class="search-icon">
+													<span
+														style="
+															display: inline-block;
+														"
+													>
+														<svg
+															width="20"
+															height="20"
+															xmlns="http://www.w3.org/2000/svg"
+														>
+															<path
+																d="M14.542 13.173c.857-.942 1.417-2.665 1.417-4.194A6.987 6.987 0 0 0 8.979 2 6.987 6.987 0 0 0 2 8.979a6.987 6.987 0 0 0 6.979 6.979c1.459 0 3.205-.554 4.167-1.444l3.82 3.807a.948.948 0 0 0 1.35-.013.979.979 0 0 0-.012-1.372l-3.762-3.763zM8.98 4.046a4.938 4.938 0 0 1 4.932 4.933 4.938 4.938 0 0 1-4.932 4.933 4.938 4.938 0 0 1-4.933-4.933A4.938 4.938 0 0 1 8.98 4.046z"
+																fill="currentColor"
+																fill-rule="nonzero"
+															></path>
+														</svg>
+													</span>
+												</div>
+												<input
+													#search
+													type="text"
+													class="search-box"
+													placeholder="Search for course"
+												/>
+											</div>
+										</div>
+										<div class="col-lg-3 col-sm-3 mb-3">
+											<div class="add-course">
+												<button
+													[routerLink]="['/']"
+													class="add-btn"
+												>
+													<span
+														>Enroll new course</span
+													>
+												</button>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-12">
+											<table
+												class="table table-image"
+												*ngIf="products"
+											>
+												<thead>
+													<tr>
+														<th scope="col">
+															Image
+														</th>
+														<th scope="col">
+															Course Name
+														</th>
+														<th scope="col">
+															Category
+														</th>
+														<th scope="col">
+															Author
+														</th>
+														<th scope="col">
+															Price
+														</th>
+														<th scope="col">
+															Created at
+														</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr
+														*ngFor="
+															let product of products
+														"
+													>
+														<td>
+															<img
+																[src]="
+																	product.image
+																"
+																class="img-fluid img-thumbnail"
+																alt="Sheep"
+															/>
+														</td>
+														<td>
+															{{ product.name }}
+														</td>
+														<td>
+															{{
+																product.category
+																	.title
+															}}
+														</td>
+														<td>
+															{{
+																product.author
+																	.name
+															}}
+														</td>
+														<td>
+															{{ product.price }}$
+														</td>
+														<td>
+															{{
+																product.created_at
+																	| date
+																		: 'shortDate'
+															}}
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

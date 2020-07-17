@@ -68,7 +68,7 @@ const userSchema = new mongoose.Schema({
 			max: 3,
 			min: 3,
 		},
-		zip_code: {
+		type: {
 			type: String,
 			required: true,
 		},
@@ -193,9 +193,7 @@ userSchema.methods.getSignedJWT = function () {
 		expiresIn: process.env.JWT_EXPIRE,
 	});
 };
-
 userSchema.methods.checkPassword = async function (rawPassword) {
 	return await bcrypt.compare(rawPassword, this.password);
 };
-
 module.exports = mongoose.model('User', userSchema);

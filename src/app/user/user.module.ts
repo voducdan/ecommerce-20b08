@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserLeftMenu } from './shared/left-menu.component';
 import { UserAccountComponent } from './user-account/user-account.component';
+import { PaymentMethodComponent } from './payment-method/payment-method.component';
+import { UserCousesComponent } from './courses/user-courses.component';
 
 @NgModule({
 	declarations: [
@@ -22,6 +24,8 @@ import { UserAccountComponent } from './user-account/user-account.component';
 		MustMatchDirective,
 		UserLeftMenu,
 		UserAccountComponent,
+		PaymentMethodComponent,
+		UserCousesComponent,
 	],
 	imports: [
 		CommonModule,

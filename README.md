@@ -53,3 +53,13 @@ Navigate to `http://localhost:4200/`. The app will automatically reload if you c
 ```
 npm start
 ```
+
+## Routes
+
+-   /courses: List all courses
+-   /course/:courseId (course/complete-python-bootcamp:-go-from-zero-to-hero-in-python-3-5ec5de2f93d3320b84139e72): course detail
+-   /user/login: Login
+-   /user/register: sign up
+-   /dashboard: Dashboard
+-   /dashboard/revenue: Revenue management
+-   /dashboard/newuser: Registered management

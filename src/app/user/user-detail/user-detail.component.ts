@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { UserDetailService } from './user-detail.service';
+import { UserService } from '../user.services';
 import { IUser } from 'src/app/shared/user.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { GlobalVariables } from 'src/app/global';
@@ -13,9 +13,9 @@ export class UserDetailComponent {
 	avt: File = null;
 	previewImage: any = null;
 	avtUploadErr: string = null;
-	constructor(private userDetailService: UserDetailService) {}
+	constructor(private UserService: UserService) {}
 	ngOnInit() {
-		this.userDetailService.getUser().subscribe((res) => {
+		this.UserService.getUser().subscribe((res) => {
 			this.user = res.data;
 			this.user.image = GlobalVariables.staticImage + this.user.image;
 			this.profileForm = new FormGroup({
@@ -46,15 +46,15 @@ export class UserDetailComponent {
 		};
 	}
 	onSubmit() {
-		this.userDetailService
-			.updateProfile(this.profileForm.value)
-			.subscribe((res) => {
+		this.UserService.updateProfile(this.profileForm.value).subscribe(
+			(res) => {
 				this.user = res.data;
 				this.user.image = GlobalVariables.staticImage + this.user.image;
-			});
+			}
+		);
 	}
 	updateAvt() {
-		this.userDetailService.updateAvt(this.avt).subscribe((res) => {
+		this.UserService.updateAvt(this.avt).subscribe((res) => {
 			this.user = res.data;
 			this.user.image = GlobalVariables.staticImage + this.user.image;
 		});

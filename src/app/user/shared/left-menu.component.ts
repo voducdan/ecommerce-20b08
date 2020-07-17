@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 			.card-body,
 			.card-header {
 				padding: 0.5rem !important;
+				border: none;
 			}
 		`,
 	],
@@ -29,6 +30,10 @@ export class UserLeftMenu {
 			this.isActive = 1;
 		} else if (this.route.url.includes('account')) {
 			this.isActive = 2;
+		} else if (this.route.url.includes('payment')) {
+			this.isActive = 3;
+		} else if (this.route.url.includes('courses')) {
+			this.isActive = 4;
 		}
 	}
 }

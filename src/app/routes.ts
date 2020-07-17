@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { ProductComponent } from './products/products.component';
+import { AboutComponent } from './about-us/about.component';
 
 export const appRoutes: Routes = [
 	{ path: '', redirectTo: '/courses', pathMatch: 'full' },
@@ -25,8 +26,11 @@ export const appRoutes: Routes = [
 			),
 	},
 	{
+		path:'about',component:AboutComponent
+	},
+	{
 		path: '**',
 		redirectTo: '/courses',
 		pathMatch: 'full',
-	},
+	}
 ];

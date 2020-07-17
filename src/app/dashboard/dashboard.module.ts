@@ -13,7 +13,6 @@ import { ProductManagementComponent } from './product-management/product-managem
 import { NewProductComponent } from './product-management/new-product/new-product.component';
 import { DashboardLeftMenu } from './shared/left-menu.component';
 import { ForbiddenComponent } from './shared/forbidden/forbidden.component';
-
 @NgModule({
 	declarations: [
 		RevenueComponent,

@@ -1,0 +1,26 @@
+.navbar {
+	margin-bottom: 40px;
+}
+.logo {
+	height: 30px;
+	width: 40px;
+}
+
+.search-width {
+	width: 84%;
+}
+
+.btn-space {
+	margin: 0 5px 0px 20px;
+}
+
+.shopping-cart {
+	border-radius: 50px;
+	border: none;
+	padding: 10px 13px;
+}
+
+.shopping-cart:hover {
+	cursor: pointer;
+	background-color: #686f7a;
+}

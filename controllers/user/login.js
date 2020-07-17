@@ -1,9 +1,8 @@
 const User = require('../../models/user.model');
-
 const errorResponse = require('../../utils/errorResponse');
 
 module.exports = async (req, res, next) => {
-	const { email, password } = req.body.params;
+	const { email, password } = req.body;
 	if (!email || !password) {
 		return next(
 			new errorResponse('Please provide an email and password', 400)
@@ -18,7 +17,7 @@ module.exports = async (req, res, next) => {
 			);
 		}
 
-		const checkPassword = user.checkPassword(password);
+		const checkPassword = await user.checkPassword(password);
 
 		if (!checkPassword) {
 			return next(

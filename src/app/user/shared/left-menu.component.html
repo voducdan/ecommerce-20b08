@@ -23,8 +23,8 @@
 			'card-body': true
 		}"
 	>
-		<a (click)="isActive = 3" [routerLink]="['/user/payment-method']"
-			>Payment method</a
+		<a (click)="isActive = 3" [routerLink]="['/user/payment']"
+			>Payment methods</a
 		>
 	</div>
 
@@ -34,14 +34,16 @@
 			'card-body': true
 		}"
 	>
-		<a (click)="isActive = 4" href="#">My courses</a>
+		<a (click)="isActive = 4" [routerLink]="['/user/courses']"
+			>My courses</a
+		>
 	</div>
 	<div
 		[ngClass]="{
-			'card-header': isActive === 4,
+			'card-header': isActive === 5,
 			'card-body': true
 		}"
 	>
-		<a (click)="isActive = 4" href="#">Close account</a>
+		<a (click)="isActive = 5" href="#">Close account</a>
 	</div>
 </div>
