@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 			.card-body,
 			.card-header {
 				padding: 0.5rem !important;
+				border: none;
 			}
 		`,
 	],
@@ -29,6 +30,10 @@ export class DashboardLeftMenu {
 			this.isActive = 2;
 		} else if (this.route.url.includes('revenue')) {
 			this.isActive = 1;
+		} else if (this.route.url.includes('products')) {
+			this.isActive = 3;
+		} else if (this.route.url.includes('users')) {
+			this.isActive = 4;
 		}
 	}
 }

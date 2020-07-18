@@ -1,62 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light row">
-	<div
-		class="col-lg-8 col-sm-2 col-2 d-flex justify-content-center align-items-center"
-	>
+	<div class="col-lg-8 col-sm-2 col-2 d-flex justify-content-center align-items-center">
 		<a class="col-lg-1navbar-brand" href="#">
-			<img
-				class="logo"
-				src="https://cdn.worldvectorlogo.com/logos/angular-icon.svg"
-				alt=""
-			/>
+			<img class="logo" src="https://cdn.worldvectorlogo.com/logos/angular-icon.svg" alt="" />
 		</a>
 		<div class="collapse navbar-collapse row" id="navbarSupportedContent">
-			<ul
-				class="col-lg-4 navbar-nav d-flex flex-row justify-content-center"
-			>
+			<ul class="col-lg-4 navbar-nav d-flex flex-row justify-content-center">
 				<li class="nav-item dropdown">
-					<a
-						class="nav-link dropdown-toggle"
-						href="#"
-						id="navbarDropdown"
-						role="button"
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded="false"
-					>
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="fas fa-th"></i>
 						Categories
 					</a>
-					<ul
-						*ngIf="categories"
-						class="dropdown-menu"
-						aria-labelledby="navbarDropdown"
-					>
-						<a
-							*ngFor="let category of categories"
-							class="dropdown-item"
-							href="#"
-							id="navbarChild"
-							role="button"
-							data-toggle="dropdown"
-							>{{ category.title }}
+					<ul *ngIf="categories" class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a *ngFor="let category of categories" class="dropdown-item" href="#" id="navbarChild"
+							role="button" data-toggle="dropdown">{{ category.title }}
 						</a>
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
+					<a class="nav-link" [routerLink]="['/about']">About</a>
 				</li>
 			</ul>
 			<form class="col-lg-8 form-inline my-2 my-lg-0">
-				<input
-					class="search-width form-control mr-sm-2"
-					type="search"
-					placeholder="Search course"
-					aria-label="Search"
-				/>
-				<button
-					class="btn btn-outline-danger my-2 my-sm-0"
-					type="submit"
-				>
+				<input class="search-width form-control mr-sm-2" type="search" placeholder="Search course"
+					aria-label="Search" />
+				<button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
 					Search
 				</button>
 			</form>
@@ -66,18 +34,30 @@
 		<button class="shopping-cart">
 			<i class="fas fa-shopping-cart"></i>
 		</button>
-		<a
-			class="btn-space btn btn-outline-danger my-2 my-sm-0"
-			type="submit"
-			[routerLink]="['/user/login']"
-			>Log in</a
-		>
-		<button
-			class="btn btn-outline-primary my-2 my-sm-0"
-			type="submit"
-			[routerLink]="['/user/register']"
-		>
-			Sign up
-		</button>
+		<div *ngIf='!check'>
+			<a class="btn-space btn btn-outline-danger my-2 my-sm-0" type="submit" [routerLink]="['/user/login']">Log
+				in</a>
+			<a class="btn btn-outline-primary my-2 my-sm-0" type="submit" [routerLink]="['/user/register']">
+				Sign up
+			</a>
+		</div>
+		<div *ngIf='check&&userInfo'>
+			<div class="collapse navbar-collapse userIcon" id="navbar-list-4">
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img [src]="userInfo.image?userInfo.image:'https://i.stack.imgur.com/l60Hf.png'"
+								width="40" height="40" class="rounded-circle">
+						</a>
+						<div class="dropdown-menu userDropdown" aria-labelledby="navbarDropdownMenuLink">
+							<a *ngIf='userInfo.role=="Admin"' class="dropdown-item" [routerLink]="['/dashboard']">Dashboard</a>
+							<a class="dropdown-item" [routerLink]="['/user/profile']">Profile</a>
+							<a class="dropdown-item" (click)='logOut()' style="cursor: pointer;">Log Out</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
 </nav>

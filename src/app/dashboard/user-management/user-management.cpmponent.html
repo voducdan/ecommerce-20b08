@@ -1,0 +1,125 @@
+<div>
+	<div class="row">
+		<div class="col-lg-2 col-sm-12" style="margin: 20px;">
+			<app-dashboard-left-menu></app-dashboard-left-menu>
+		</div>
+		<div class="col-lg-9 col-sm-12">
+			<div class="header">
+				<div class="overview">
+					<h6 class="px-4">User Overview</h6>
+				</div>
+			</div>
+			<div class="container users">
+				<div class="row">
+					<div class="col-lg-4 col-sm-9 mb-3">
+						<div class="search-user">
+							<div class="search-icon">
+								<span style="display: inline-block;">
+									<svg
+										width="20"
+										height="20"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M14.542 13.173c.857-.942 1.417-2.665 1.417-4.194A6.987 6.987 0 0 0 8.979 2 6.987 6.987 0 0 0 2 8.979a6.987 6.987 0 0 0 6.979 6.979c1.459 0 3.205-.554 4.167-1.444l3.82 3.807a.948.948 0 0 0 1.35-.013.979.979 0 0 0-.012-1.372l-3.762-3.763zM8.98 4.046a4.938 4.938 0 0 1 4.932 4.933 4.938 4.938 0 0 1-4.932 4.933 4.938 4.938 0 0 1-4.933-4.933A4.938 4.938 0 0 1 8.98 4.046z"
+											fill="currentColor"
+											fill-rule="nonzero"
+										></path>
+									</svg>
+								</span>
+							</div>
+							<input
+								#search
+								type="text"
+								class="search-box"
+								(keyup)="filterUser(search.value+'')"
+								placeholder="Search for user"
+							/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<table class="table table-image" *ngIf="users">
+							<thead>
+								<tr>
+									<th scope="col">Image</th>
+									<th scope="col">Name</th>
+									<th scope="col">Email</th>
+									<th scope="col">Role</th>
+									<th scope="col">Created at</th>
+									<th scope="col">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let user of users">
+									<td>
+										<img
+											*ngIf="user.image"
+											[src]="user.image"
+											style="width: 100px;"
+											class="img-fluid img-thumbnail"
+											alt="Sheep"
+										/>
+										<div
+											*ngIf="!user.image"
+											class="non-image-avt"
+										>
+											<form>
+												<label for="avt"
+													>Upload avt</label
+												>
+												<br />
+												<input
+													type="file"
+													name=""
+													id="avt"
+												/>
+											</form>
+										</div>
+									</td>
+									<td>
+										{{user.firstname}} {{ user.lastname}}
+									</td>
+									<td>{{user.email}}</td>
+									<td>{{user.role}}$</td>
+									<td>
+										{{user.create_at|date:'shortDate'}}
+									</td>
+									<td>
+										<a
+											class="nav-link dropdown-toggle"
+											href="#"
+											id="navbarDropdownMenuLink"
+											role="button"
+											data-toggle="dropdown"
+											aria-haspopup="true"
+											aria-expanded="false"
+										>
+										</a>
+										<div
+											class="dropdown-menu text-center"
+											aria-labelledby="navbarDropdownMenuLink"
+										>
+											<a
+												class="text-primary mr-2 user-action"
+												(click)="editUser(user._id)"
+												>Edit</a
+											>
+											/
+											<a
+												class="text-danger ml-2 user-action"
+												(click)="deleteUser(user._id)"
+												>Delete</a
+											>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

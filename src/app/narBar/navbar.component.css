@@ -15,7 +15,7 @@
 }
 
 .shopping-cart {
-	border-radius: 50px;
+	border-radius: 50%;
 	border: none;
 	padding: 10px 13px;
 }
@@ -23,4 +23,13 @@
 .shopping-cart:hover {
 	cursor: pointer;
 	background-color: #686f7a;
+}
+
+.userDropdown{
+	position: relative;
+	left: -75px;
+}
+
+.userIcon{
+	height: 46px !important;
 }

@@ -7,6 +7,7 @@ import { NewProductComponent } from './product-management/new-product/new-produc
 import { ForbiddenComponent } from './shared/forbidden/forbidden.component';
 
 import { AuthGuard } from './shared/auth.guard';
+import { UserManagementComponent } from './user-management/user-management.cpmponent';
 
 export const dashboardRoutes: Routes = [
 	{
@@ -24,6 +25,11 @@ export const dashboardRoutes: Routes = [
 	{
 		path: 'products/new',
 		component: NewProductComponent,
+		canActivate: [AuthGuard],
+	},
+	{
+		path: 'users',
+		component: UserManagementComponent,
 		canActivate: [AuthGuard],
 	},
 	{ path: '403', component: ForbiddenComponent },

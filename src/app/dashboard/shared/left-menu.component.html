@@ -38,6 +38,8 @@
 			'card-body': true
 		}"
 	>
-		<a (click)="isActive = 4" href="#">User management</a>
+		<a (click)="isActive = 4" [routerLink]="['/dashboard/users']"
+			>User management</a
+		>
 	</div>
 </div>

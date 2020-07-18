@@ -2,7 +2,7 @@ const User = require('../../models/user.model');
 const errorResponse = require('../../utils/errorResponse');
 
 module.exports = async (req, res, next) => {
-	const { email, password } = req.body;
+	const { email, password } = req.body.params;
 	if (!email || !password) {
 		return next(
 			new errorResponse('Please provide an email and password', 400)
