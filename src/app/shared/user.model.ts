@@ -1,6 +1,6 @@
 import { IProduct } from './products.model';
 export interface IUser {
-	_id: string;
+	_id?: string;
 	firstname: string;
 	lastname: string;
 	headline?: string;

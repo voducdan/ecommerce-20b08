@@ -10,7 +10,9 @@ module.exports = async (req, res, next) => {
 			'/' + splitedPath.slice(1, splitedPath.length).join('/');
 		if (req.user.image) {
 			const oldImagePath = path.join(
-				globalVar.rootPath,
+				__dirname,
+				'..',
+				'..',
 				'uploads',
 				req.user.image
 			);

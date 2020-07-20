@@ -33,9 +33,13 @@ export class LoginComponent {
 					this.redirectURL = params['redirectURL'];
 				}
 				if (this.redirectURL) {
-					window.location.href = this.redirectURL
+					this.router.navigateByUrl(this.redirectURL).then(() => {
+						window.location.reload();
+					});
 				} else {
-					window.location.href = '/'
+					this.router.navigate(['courses']).then(() => {
+						window.location.reload();
+					});
 				}
 			} else {
 				this.loginSuccess = false;

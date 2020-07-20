@@ -13,6 +13,7 @@ export class UserDetailComponent {
 	avt: File = null;
 	previewImage: any = null;
 	avtUploadErr: string = null;
+	changeAvtSuccess: boolean = false;
 	constructor(private UserService: UserService) {}
 	ngOnInit() {
 		this.UserService.getUser().subscribe((res) => {
@@ -57,6 +58,9 @@ export class UserDetailComponent {
 		this.UserService.updateAvt(this.avt).subscribe((res) => {
 			this.user = res.data;
 			this.user.image = GlobalVariables.staticImage + this.user.image;
+			if (res.success) {
+				this.changeAvtSuccess = true;
+			}
 		});
 	}
 }

@@ -24,7 +24,6 @@ export class RegistrationComponent {
 	constructor(private router: Router, private userService: UserService) {}
 
 	user: IUser = {
-		_id: '',
 		lastname: '',
 		firstname: '',
 		password: '',
@@ -36,7 +35,9 @@ export class RegistrationComponent {
 	onSubmit() {
 		this.userService.register(this.user).subscribe((res) => {
 			if (res.success) {
-				this.router.navigate(['courses']);
+				this.router
+					.navigate(['courses'])
+					.then(() => window.location.reload());
 			}
 		});
 	}
