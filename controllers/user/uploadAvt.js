@@ -6,6 +6,7 @@ const ErrorHandler = require('../../utils/errorResponse');
 module.exports = async (req, res, next) => {
 	try {
 		const splitedPath = req.file.path.split('\\');
+		console.log(req.file.path);
 		const imagePath =
 			'/' + splitedPath.slice(1, splitedPath.length).join('/');
 		if (req.user.image) {
