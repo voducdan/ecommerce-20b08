@@ -13,7 +13,7 @@ module.exports = async (req, res, next) => {
 		} else {
 			const splitedPath = req.file.path.split('/');
 			imagePath =
-				'/' + splitedPath.slice(2, splitedPath.length).join('/');
+				'/' + splitedPath.slice(3, splitedPath.length).join('/');
 		}
 
 		if (req.user.image) {
