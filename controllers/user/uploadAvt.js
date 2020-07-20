@@ -5,10 +5,16 @@ const path = require('path');
 const ErrorHandler = require('../../utils/errorResponse');
 module.exports = async (req, res, next) => {
 	try {
-		const splitedPath = req.file.path.split('\\');
-		console.log(req.file.path);
-		const imagePath =
-			'/' + splitedPath.slice(1, splitedPath.length).join('/');
+		if (req.file.path.includes('\\')) {
+			const splitedPath = req.file.path.split('\\');
+			const imagePath =
+				'/' + splitedPath.slice(1, splitedPath.length).join('/');
+		} else {
+			const splitedPath = req.file.path.split('/');
+			const imagePath =
+				'/' + splitedPath.slice(2, splitedPath.length).join('/');
+		}
+
 		if (req.user.image) {
 			const oldImagePath = path.join(
 				__dirname,
@@ -17,7 +23,6 @@ module.exports = async (req, res, next) => {
 				'uploads',
 				req.user.image
 			);
-			console.log(oldImagePath)
 			fs.unlinkSync(oldImagePath);
 		}
 		const updatedUser = await User.findByIdAndUpdate(req.user._id, {
