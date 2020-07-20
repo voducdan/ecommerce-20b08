@@ -5,13 +5,14 @@ const path = require('path');
 const ErrorHandler = require('../../utils/errorResponse');
 module.exports = async (req, res, next) => {
 	try {
+		let imagePath = '';
 		if (req.file.path.includes('\\')) {
 			const splitedPath = req.file.path.split('\\');
-			const imagePath =
+			imagePath =
 				'/' + splitedPath.slice(1, splitedPath.length).join('/');
 		} else {
 			const splitedPath = req.file.path.split('/');
-			const imagePath =
+			imagePath =
 				'/' + splitedPath.slice(2, splitedPath.length).join('/');
 		}
 
