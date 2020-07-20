@@ -16,6 +16,7 @@ module.exports = async (req, res, next) => {
 				'uploads',
 				req.user.image
 			);
+			console.log(oldImagePath)
 			fs.unlinkSync(oldImagePath);
 		}
 		const updatedUser = await User.findByIdAndUpdate(req.user._id, {
