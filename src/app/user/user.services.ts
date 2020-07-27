@@ -160,4 +160,33 @@ export class UserService {
 			.get(`${GlobalVariables.apiURL}/user/courses`, httpOptions)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
+
+	forgotPass(email): Observable<any> {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-type': 'application/json',
+			}),
+		};
+		return this.http
+			.post(
+				`${GlobalVariables.apiURL}/user/forgotpassword`,
+				email,
+				httpOptions
+			)
+			.pipe(map(this.extractData), catchError(this.handleError));
+	}
+	resetPass(data): Observable<any> {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-type': 'application/json',
+			}),
+		};
+		return this.http
+			.post(
+				`${GlobalVariables.apiURL}/user/resetpassword`,
+				data,
+				httpOptions
+			)
+			.pipe(map(this.extractData), catchError(this.handleError));
+	}
 }

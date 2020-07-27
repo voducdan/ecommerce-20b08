@@ -19,7 +19,7 @@ const httpOptions = {
 @Injectable({
 	providedIn: 'root',
 })
-export class NavBarService {
+export class SearchCourseService {
 	constructor(private http: HttpClient) {}
 	private handleError(error: HttpErrorResponse) {
 		if (error.error instanceof ErrorEvent) {
@@ -37,17 +37,20 @@ export class NavBarService {
 		const body = res;
 		return body || {};
 	}
-	getCategories(): Observable<any> {
+
+	searchCourse(filter): Observable<any> {
 		return this.http
-			.get(GlobalVariables.apiURL + '/categories', httpOptions)
-			.pipe(map(this.extractData), catchError(this.handleError));
-	}
-	searchSuggestions(key): Observable<any> {
-		return this.http
-			.get(
-				GlobalVariables.apiURL + '/search/suggestions?s=' + key,
+			.post(
+				GlobalVariables.apiURL + '/search/courses',
+				filter,
 				httpOptions
 			)
+			.pipe(map(this.extractData), catchError(this.handleError));
+	}
+
+	getCoursesByName(name): Observable<any> {
+		return this.http
+			.get(GlobalVariables.apiURL + '/search?s=' + name, httpOptions)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
 }

@@ -1,0 +1,215 @@
+<div *ngIf="courses" class="search-courses mx-5">
+	<div class="row header">
+		<h3>{{ courses.length }} results for “{{ s }}”</h3>
+	</div>
+	<!-- <div class="row filter">
+		<div class="filter-btn">
+			<div class="btn btn-outline-primary">
+				<i class="fas fa-filter pr-1"></i>Filter
+			</div>
+		</div>
+		<div class="sort-selector">
+			<select name="" id="">
+				<option value="">Most relevant</option>
+			</select>
+		</div>
+	</div> -->
+	<div class="row courses">
+		<div class="col-md-3 col-lg-3 col-sm-0 px-0" style="position: fixed;">
+			<div class="level">
+				<a
+					class="level-btn font-weight-bold"
+					data-toggle="collapse"
+					href="#levellist"
+					role="button"
+					aria-expanded="false"
+					aria-controls="multiCollapseExample1"
+					>Level</a
+				>
+				<div class="collapse multi-collapse show" id="levellist">
+					<div class="level-check">
+						<label class="level-check-label" for="all">
+							<input
+								type="checkbox"
+								class="level-check-input mr-2"
+								id="all"
+								name="levelSelected"
+								value="All levels"
+								type="radio"
+								(change)="filterLevel('All levels')"
+								ngDefaultControl
+							/>
+							<span>All Levels</span>
+						</label>
+					</div>
+					<div class="level-check">
+						<label class="level-check-label" for="beginner">
+							<input
+								type="checkbox"
+								class="level-check-input mr-2"
+								id="beginner"
+								name="levelSelected"
+								value="Beginner"
+								type="radio"
+								(change)="filterLevel('Beginner')"
+								ngDefaultControl
+							/>
+							<span>Beginner</span>
+						</label>
+					</div>
+					<div class="level-check">
+						<label class="level-check-label" for="intermediate">
+							<input
+								type="checkbox"
+								class="level-check-input mr-2"
+								id="intermediate"
+								name="levelSelected"
+								value="Intermediate"
+								type="radio"
+								(change)="filterLevel('Intermediate')"
+							/>
+							<span>Intermediate</span>
+						</label>
+					</div>
+					<div class="level-check">
+						<label class="level-check-label" for="expert">
+							<input
+								type="checkbox"
+								class="level-check-input mr-2"
+								id="expert"
+								name="levelSelected"
+								value="Expert"
+								type="radio"
+								(change)="filterLevel('Expert')"
+							/>
+							<span>Expert</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="level">
+				<a
+					class="level-btn font-weight-bold"
+					data-toggle="collapse"
+					href="#pricelist"
+					role="button"
+					aria-expanded="false"
+					aria-controls="pricelist"
+					>Price</a
+				>
+				<div class="collapse multi-collapse" id="pricelist">
+					<div class="level-check">
+						<label class="level-check-label" for="pay">
+							<input
+								type="checkbox"
+								class="level-check-input mr-2"
+								id="pay"
+								name="price"
+								value="true"
+								type="radio"
+								(change)="filterPrice(true)"
+							/>
+							<span>Price</span>
+						</label>
+					</div>
+					<div class="level-check">
+						<label class="level-check-label" for="free">
+							<input
+								type="checkbox"
+								class="level-check-input mr-2"
+								id="free"
+								name="price"
+								value="false"
+								type="radio"
+								(change)="filterPrice(false)"
+							/>
+							<span>Free</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="level rating">
+				<a
+					class="level-btn font-weight-bold"
+					data-toggle="collapse"
+					href="#ratinglist"
+					role="button"
+					aria-expanded="false"
+					aria-controls="pricelist"
+					>Rating</a
+				>
+				<div class="collapse multi-collapse" id="ratinglist">
+					<div class="level-check">
+						<label class="level-check-label" for="4.5">
+							<input
+								type="checkbox"
+								class="level-check-input mr-2"
+								id="4.5"
+								name="rating"
+								value="4.5"
+								type="radio"
+								(change)="filterRating(4.5)"
+							/>
+							<span>4.5 & Up</span>
+						</label>
+					</div>
+					<div class="level-check">
+						<label class="level-check-label" for="4">
+							<input
+								type="checkbox"
+								class="level-check-input mr-2"
+								id="4"
+								name="rating"
+								value="4"
+								type="radio"
+								(change)="filterRating(4)"
+							/>
+							<span>4 & Up</span>
+						</label>
+					</div>
+					<div class="level-check">
+						<label class="level-check-label" for="3.5">
+							<input
+								type="checkbox"
+								class="level-check-input mr-2"
+								id="3.5"
+								name="rating"
+								value="3.5"
+								type="radio"
+								(change)="filterRating(3.5)"
+							/>
+							<span>3.5 & Up</span>
+						</label>
+					</div>
+					<div class="level-check">
+						<label class="level-check-label" for="3">
+							<input
+								type="checkbox"
+								class="level-check-input mr-2"
+								id="3"
+								name="rating"
+								value="3"
+								type="radio"
+								(change)="filterRating(3)"
+							/>
+							<span>3 & Up</span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9 col-lg-9 col-sm-12 list-search-courses pl-5">
+			<div *ngFor="let course of courses" class="course">
+				<a
+					[routerLink]="[course.url + '-' + course._id]"
+					style="text-decoration: none;"
+				>
+					<app-products-thumnail
+						[product]="course"
+						class="course-thumnail"
+					></app-products-thumnail>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

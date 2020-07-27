@@ -15,6 +15,7 @@ const statisticsRouter = require('./routes/statistics.routes');
 const coursesRouter = require('./routes/courses.routes');
 const categoryRouter = require('./routes/category.routes');
 const userRouter = require('./routes/user.routes');
+const searchRouter = require('./routes/search.routes');
 
 const app = express();
 
@@ -68,6 +69,7 @@ app.use('/api/v1/statistics', statisticsRouter);
 app.use('/api/v1/courses', coursesRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/search', searchRouter);
 
 // use errorhandler middleware
 app.use(errorHandler);

@@ -15,6 +15,8 @@ import { UserLeftMenu } from './shared/left-menu.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { PaymentMethodComponent } from './payment-method/payment-method.component';
 import { UserCousesComponent } from './courses/user-courses.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
 	declarations: [
@@ -26,6 +28,8 @@ import { UserCousesComponent } from './courses/user-courses.component';
 		UserAccountComponent,
 		PaymentMethodComponent,
 		UserCousesComponent,
+		ResetPasswordComponent,
+		ForgotPasswordComponent,
 	],
 	imports: [
 		CommonModule,

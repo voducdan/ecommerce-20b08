@@ -34,16 +34,18 @@
 	display: none;
 	width: 335px;
 	top: 50%;
-	left: 220px;
+	left: 212px;
 	transform: translate(0, -50%);
 	z-index: 10;
 }
 
 .course:nth-of-type(4n) .short-description,
 .course:nth-of-type(5n) .short-description {
-	left: -345px !important;
+	left: -336px !important;
 }
-
+.course:nth-last-child(-n + 5) .short-description {
+	top: 0 !important;
+}
 .list-courses .course:hover .short-description {
 	display: block;
 	position: absolute;

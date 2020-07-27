@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { ProductComponent } from './products/products.component';
 import { AboutComponent } from './about-us/about.component';
+import { SearchCoursesComponent } from './search-courses/search-courses.component';
 
 export const appRoutes: Routes = [
 	{ path: '', redirectTo: '/courses', pathMatch: 'full' },
@@ -26,11 +27,16 @@ export const appRoutes: Routes = [
 			),
 	},
 	{
-		path:'about',component:AboutComponent
+		path: 'about',
+		component: AboutComponent,
+	},
+	{
+		path: 'search/course',
+		component: SearchCoursesComponent,
 	},
 	{
 		path: '**',
 		redirectTo: '/courses',
 		pathMatch: 'full',
-	}
+	},
 ];

@@ -35,6 +35,7 @@ export class ProductDetailComponent implements OnInit {
 			.toPromise();
 	}
 	fetchStudentBuy(categoryId): Promise<any> {
+		console.log(categoryId);
 		return this.productDetailService.getstudentBuy(categoryId).toPromise();
 	}
 	async fetchData(productId) {

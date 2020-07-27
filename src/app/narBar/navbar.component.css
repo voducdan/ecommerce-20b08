@@ -1,6 +1,6 @@
-.navbar {
+/* .navbar {
 	margin-bottom: 40px;
-}
+} */
 .logo {
 	height: 30px;
 	width: 40px;
@@ -25,11 +25,26 @@
 	background-color: #686f7a;
 }
 
-.userDropdown{
+.userDropdown {
 	position: relative;
 	left: -75px;
 }
 
-.userIcon{
+.userIcon {
 	height: 46px !important;
+}
+
+.search-suggestions {
+	animation: udlite-search-form-autocomplete-expand 150ms
+		cubic-bezier(0, 0, 0.38, 0.9);
+	position: absolute;
+	z-index: 1;
+	top: 40px;
+	width: calc(80% + 2px);
+	border: 1px solid #dcdacb;
+}
+.list-group-item {
+	border: none;
+	background-color: #fdf9f9;
+	font-size: 0.9rem;
 }

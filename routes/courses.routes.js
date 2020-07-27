@@ -4,6 +4,8 @@ const getCourses = require('../controllers/course/getCourses');
 const getCourseDetail = require('../controllers/course/getCoursedetail');
 const studentBuy = require('../controllers/course/studentbuy');
 const deleteCourse = require('../controllers/course/deleteCourse');
+const searchSuggestions = require('../controllers/course/searchSuggestions');
+const searchCourse = require('../controllers/course/searchCourse');
 
 const { authorize, checkToken } = require('../middleware/auth');
 

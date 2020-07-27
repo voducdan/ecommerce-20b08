@@ -14,6 +14,10 @@ const login = require('../controllers/user/login');
 const getPayment = require('../controllers/user/getPayment');
 const updatePayment = require('../controllers/user/updatePayment');
 const getUserCourses = require('../controllers/user/getUserCourses');
+const {
+	forgotPassword,
+	resetPassword,
+} = require('../controllers/user/resetPassword');
 const upload = require('../config/multer-storage');
 
 router.route('/all').get(checkToken, authorize('Admin'), getUsers);
@@ -32,4 +36,6 @@ router
 	.get(checkToken, getPayment)
 	.post(checkToken, updatePayment);
 router.get('/courses', checkToken, getUserCourses);
+router.post('/forgotpassword', forgotPassword);
+router.post('/resetpassword', resetPassword);
 module.exports = router;
