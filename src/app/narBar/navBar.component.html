@@ -143,8 +143,13 @@
 		</div>
 	</div>
 	<div class="col-lg-4 col-sm-10 col-10 d-flex justify-content-end">
-		<button class="shopping-cart">
+		<button class="shopping-cart mr-2" [routerLink]="['/cart']">
 			<i class="fas fa-shopping-cart"></i>
+			<span
+				*ngIf="numCartItem > 0"
+				class="header--dropdown-counter-badge--bsUVW udlite-notification-badge udlite-notification-counter"
+				>{{ numCartItem }}</span
+			>
 		</button>
 		<div *ngIf="!check">
 			<a

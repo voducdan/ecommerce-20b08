@@ -1,0 +1,55 @@
+<div class="cart">
+	<div class="row header">
+		<div class="container">
+			<h3>Shopping cart</h3>
+		</div>
+	</div>
+	<div class="cart-content">
+		<div *ngIf="cart" class="container">
+			<h5>{{ cart.length }} Courses in Cart</h5>
+			<div class="row">
+				<div class="col-9 cart-items">
+					<div
+						*ngFor="let item of cart"
+						class="card cart-item flex-row flex-wrap"
+					>
+						<div class="item-img border-0">
+							<img [src]="item.image" alt="" />
+						</div>
+						<div class="item-content px-2">
+							<div class="content">
+								<h4 class="card-title">{{ item.name }}</h4>
+								<p class="card-text">{{ item.headline }}</p>
+							</div>
+							<div class="action">
+								<a
+									class="remove-item"
+									(click)="removeCartItem(item._id)"
+									>Remove</a
+								>
+							</div>
+							<div class="item-price">
+								<i class="fas fa-dollar-sign"></i>
+								{{
+									item.discount
+										? item.price -
+										  (item.price * item.discount) / 100
+										: item.price
+								}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-3 total-price">
+					<h4>Total</h4>
+					<h2>
+						<b><i class="fas fa-dollar-sign"></i>{{ total }}</b>
+					</h2>
+					<div class="btn btn-danger px-5 py-2">
+						Checkout
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

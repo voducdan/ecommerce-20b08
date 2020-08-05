@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import {
 	HttpClient,
 	HttpHeaders,
@@ -11,15 +10,10 @@ import { catchError, map } from 'rxjs/operators';
 import { GlobalVariables } from '../global/global.variable';
 import { AuthService } from '../dashboard/shared/auth.services';
 
-const httpOptions = {
-	headers: new HttpHeaders({ 'Content-type': 'application/json' }),
-	params: {},
-};
-
 @Injectable({
 	providedIn: 'root',
 })
-export class ProductService {
+export class CartService {
 	constructor(private http: HttpClient, private authService: AuthService) {}
 
 	private handleError(error: HttpErrorResponse) {
@@ -39,40 +33,31 @@ export class ProductService {
 		return body || {};
 	}
 
-	getProducts(page = 1): Observable<any> {
+	getCart(cart): Observable<any> {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-type': 'application/json',
+			}),
+		};
 		return this.http
-			.get(GlobalVariables.apiURL + '/courses?page=' + page, httpOptions)
+			.post(
+				GlobalVariables.apiURL + '/courses/cart',
+				{ cart },
+				httpOptions
+			)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
-
-	getCart(): Observable<any> {
-		if (this.authService.getToken()) {
-			const httpOptions = {
-				headers: new HttpHeaders({
-					'Content-type': 'application/json',
-					authorization: `Bearer ${this.authService.getToken()}`,
-				}),
-			};
-			return this.http
-				.get(`${GlobalVariables.apiURL}/user/cart`, httpOptions)
-				.pipe(map(this.extractData), catchError(this.handleError));
-		}
-		return new Observable((observer) => {
-			observer.next({
-				success: false,
-			});
-		});
-	}
-
-	updateCart(cart: string[]): Observable<any> {
+	removeCartItem(item): Observable<any> {
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Content-type': 'application/json',
 				authorization: `Bearer ${this.authService.getToken()}`,
 			}),
 		};
-		return this.http
-			.post(`${GlobalVariables.apiURL}/user/cart`, { cart }, httpOptions)
-			.pipe(map(this.extractData), catchError(this.handleError));
+		return this.http.put(
+			GlobalVariables.apiURL + '/user/cart',
+			{ courseId: item },
+			httpOptions
+		);
 	}
 }

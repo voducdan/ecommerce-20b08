@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NavBarService } from './navbar-service';
@@ -16,6 +16,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class NavBarComponent {
 	categories: ICategory;
 	userInfo: IUser;
+	@Input() numCartItem: number = 0;
 	constructor(
 		private navBarService: NavBarService,
 		private uService: UserService,
@@ -52,6 +53,7 @@ export class NavBarComponent {
 	}
 	logOut() {
 		localStorage.removeItem('token');
+		localStorage.removeItem('cart');
 		window.location.href = '/';
 	}
 

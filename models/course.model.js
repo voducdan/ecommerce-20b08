@@ -162,5 +162,4 @@ courseSchema.pre('save', function (next) {
 	this.url = '/course/' + this.slug;
 	next();
 });
-
 module.exports = mongoose.model('Course', courseSchema);

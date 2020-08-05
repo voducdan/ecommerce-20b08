@@ -14,6 +14,10 @@ const login = require('../controllers/user/login');
 const getPayment = require('../controllers/user/getPayment');
 const updatePayment = require('../controllers/user/updatePayment');
 const getUserCourses = require('../controllers/user/getUserCourses');
+const getUserCart = require('../controllers/user/getUserCart');
+const updateUserCart = require('../controllers/user/updateUserCart');
+const deleteCartItem = require('../controllers/user/deleteCartItem');
+
 const {
 	forgotPassword,
 	resetPassword,
@@ -38,4 +42,9 @@ router
 router.get('/courses', checkToken, getUserCourses);
 router.post('/forgotpassword', forgotPassword);
 router.post('/resetpassword', resetPassword);
+router.get('/cart', checkToken, getUserCart);
+router
+	.route('/cart')
+	.post(checkToken, updateUserCart)
+	.put(checkToken, deleteCartItem);
 module.exports = router;

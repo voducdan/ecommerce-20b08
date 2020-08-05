@@ -9,9 +9,11 @@ import { appRoutes } from './routes';
 import { AppComponent } from './app.component';
 import { ProductComponent } from './products/products.component';
 import { SharedModule } from './shared/shared.module';
+import { MarketingComponent } from './marketing/marketing.component';
 import { NavBarComponent } from './narBar/navbar.component';
 import { AboutComponent } from './about-us/about.component';
 import { SearchCoursesComponent } from './search-courses/search-courses.component';
+import { CartComponent } from './cart/cart.component';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -19,6 +21,8 @@ import { SearchCoursesComponent } from './search-courses/search-courses.componen
 		NavBarComponent,
 		AboutComponent,
 		SearchCoursesComponent,
+		MarketingComponent,
+		CartComponent,
 	],
 	imports: [
 		RouterModule.forRoot(appRoutes),

@@ -67,3 +67,20 @@
 	color: #686f7a;
 	font-size: 13px;
 }
+.carousel {
+	height: 400px;
+}
+.carousel .carousel-inner {
+	height: 100%;
+}
+
+.carousel-item {
+	height: 100%;
+}
+
+.carousel-item img {
+	height: 100%;
+}
+.carousel-caption {
+	color: #ffffff;
+}

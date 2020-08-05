@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EventService } from './event-service';
 
 @Component({
 	selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'ECommerce 20B08';
+	numCartItem: number = 0;
+
+	constructor(private eventService: EventService) {}
+	ngOnInit() {
+		setTimeout(() => {
+			this.eventService.currentMessage.subscribe((numCartItem) => {
+				this.numCartItem = numCartItem;
+			});
+		}, 1);
+	}
 }
