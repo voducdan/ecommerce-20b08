@@ -34,7 +34,8 @@
 						<a
 							*ngFor="let category of categories"
 							class="dropdown-item"
-							href="#"
+							[routerLink]="['/courses']"
+							[queryParams]="{ category: category._id }"
 							id="navbarChild"
 							role="button"
 							data-toggle="dropdown"

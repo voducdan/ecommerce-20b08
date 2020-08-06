@@ -46,18 +46,21 @@ export class ProductComponent {
 			}
 		});
 		this.route.queryParams.subscribe((query) => {
-			this.productService.getProducts(query.page).subscribe((res) => {
-				this.next = res.next;
-				this.prev = res.prev;
-				this.numPage = Array(res.numPage)
-					.fill(0)
-					.map((x, i) => i + 1);
-				this.currPage = res.page;
-				this.products = res.data;
-				this.products.map((product) => {
-					product.image = GlobalVariables.staticImage + product.image;
+			this.productService
+				.getProducts({ page: query.page, category: query.category })
+				.subscribe((res) => {
+					this.next = res.next;
+					this.prev = res.prev;
+					this.numPage = Array(res.numPage)
+						.fill(0)
+						.map((x, i) => i + 1);
+					this.currPage = res.page;
+					this.products = res.data;
+					this.products.map((product) => {
+						product.image =
+							GlobalVariables.staticImage + product.image;
+					});
 				});
-			});
 		});
 	}
 

@@ -39,9 +39,24 @@ export class ProductService {
 		return body || {};
 	}
 
-	getProducts(page = 1): Observable<any> {
+	getProducts(query): Observable<any> {
+		let url = '';
+		if (!query.page) {
+			query.page = 1;
+		}
+		if (query.category) {
+			url =
+				GlobalVariables.apiURL +
+				'/courses?page=' +
+				query.page +
+				'&category=' +
+				query.category;
+		} else {
+			url = GlobalVariables.apiURL + '/courses?page=' + query.page;
+		}
+		console.log(url);
 		return this.http
-			.get(GlobalVariables.apiURL + '/courses?page=' + page, httpOptions)
+			.get(url, httpOptions)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
 
