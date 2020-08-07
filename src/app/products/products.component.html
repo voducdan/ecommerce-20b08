@@ -56,6 +56,9 @@
 		<span class="sr-only">Next</span>
 	</a>
 </div>
+<div class="loading">
+	<app-loading *ngIf="!products"></app-loading>
+</div>
 <div class="container">
 	<h4 class="mt-5">All Courses</h4>
 	<div class="list-courses">

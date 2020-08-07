@@ -1,3 +1,6 @@
+<div class="loading" *ngIf="!courses">
+	<app-loading></app-loading>
+</div>
 <div *ngIf="courses" class="search-courses mx-5">
 	<div class="row header">
 		<h3>{{ courses.length }} results for “{{ s }}”</h3>

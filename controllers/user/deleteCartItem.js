@@ -11,6 +11,13 @@ module.exports = async (req, res, next) => {
 			{ cart: userCart },
 			{ new: true }
 		).populate('cart');
+		if (updateCart.cart.length === 0) {
+			return res.status(200).json({
+				success: true,
+				data: [],
+				total: 0,
+			});
+		}
 		const total = updateCart.cart.reduce((c1, c2) => {
 			let d1 = c1.discount ? c1.discount : 0;
 			let d2 = c2.discount ? c2.discount : 0;

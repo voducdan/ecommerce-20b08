@@ -14,6 +14,7 @@ import { NavBarComponent } from './narBar/navbar.component';
 import { AboutComponent } from './about-us/about.component';
 import { SearchCoursesComponent } from './search-courses/search-courses.component';
 import { CartComponent } from './cart/cart.component';
+import { LoadingComponent } from './loading/loading.component';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -23,6 +24,7 @@ import { CartComponent } from './cart/cart.component';
 		SearchCoursesComponent,
 		MarketingComponent,
 		CartComponent,
+		LoadingComponent,
 	],
 	imports: [
 		RouterModule.forRoot(appRoutes),
@@ -32,6 +34,7 @@ import { CartComponent } from './cart/cart.component';
 		FormsModule,
 		ReactiveFormsModule,
 	],
+	exports: [LoadingComponent],
 	providers: [],
 	bootstrap: [AppComponent],
 })

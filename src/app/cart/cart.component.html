@@ -1,3 +1,6 @@
+<div class="loading" *ngIf="!cart">
+	<app-loading></app-loading>
+</div>
 <div class="cart">
 	<div class="row header">
 		<div class="container">
@@ -5,18 +8,18 @@
 		</div>
 	</div>
 	<div class="cart-content">
-		<div *ngIf="cart == null" class="container">
+		<div *ngIf="cart && cart.length === 0" class="container">
 			<h5>0 Courses in Cart</h5>
 			<div class="keep-shopping">
-			<i class="fas fa-cart-plus"></i>
+				<i class="fas fa-cart-plus"></i>
 
-				<p> Your cart is empty. Keep shopping to find a course!</p>
+				<p>Your cart is empty. Keep shopping to find a course!</p>
 				<div class="btn btn-danger px-5 py-2">
 					Keep shopping
 				</div>
 			</div>
 		</div>
-		<div *ngIf="cart" class="container">
+		<div *ngIf="cart && cart.length > 0" class="container">
 			<h5>{{ cart.length }} Courses in Cart</h5>
 			<div class="row">
 				<div class="col-9 cart-items">

@@ -3,7 +3,7 @@ const ErrorResponse = require('../../utils/errorResponse');
 module.exports = async (req, res, next) => {
 	try {
 		const cart = req.body.cart;
-		if (cart) {
+		if (cart && cart.length > 0) {
 			const promises = cart.map(async (item) => {
 				return Course.findById(item);
 			});
@@ -28,6 +28,7 @@ module.exports = async (req, res, next) => {
 		}
 		return res.status(400).json({
 			success: false,
+			data: [],
 		});
 	} catch (error) {
 		return next(new ErrorResponse(error, 500));

@@ -8,14 +8,17 @@ module.exports = async (req, res, next) => {
 	const skip = currPage * perPage - perPage;
 	try {
 		let courses = [];
+		let count;
 		if (categoryId) {
 			courses = await Course.find({ category: categoryId })
 				.skip(skip)
 				.limit(perPage);
+			count = await (await Course.find({ category: categoryId })).length;
 		} else {
 			courses = await Course.find({}).skip(skip).limit(perPage);
+			count = await Course.countDocuments();
 		}
-		const count = await courses.length;
+
 		res.status(200).json({
 			success: true,
 			data: courses,

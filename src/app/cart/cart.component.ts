@@ -24,7 +24,6 @@ export class CartComponent {
 				this.cartService.getCart(res.data).subscribe((response) => {
 					this.cart = response.data;
 					this.total = response.total;
-					console.log(this.total);
 					this.cart.map((product) => {
 						product.image =
 							GlobalVariables.staticImage + product.image;
