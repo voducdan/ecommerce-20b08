@@ -11,9 +11,22 @@ module.exports = async (req, res, next) => {
 			{ cart: userCart },
 			{ new: true }
 		).populate('cart');
+		const total = updateCart.cart.reduce((c1, c2) => {
+			let d1 = c1.discount ? c1.discount : 0;
+			let d2 = c2.discount ? c2.discount : 0;
+			return {
+				price:
+					c1.price -
+					(c1.price * d1) / 100 +
+					c2.price -
+					(c2.price * d2) / 100,
+				discount: 0,
+			};
+		});
 		return res.status(200).json({
 			success: true,
 			data: updateCart.cart,
+			total: total.price,
 		});
 	} catch (error) {
 		return next(new ErrorResponse(error, 500));

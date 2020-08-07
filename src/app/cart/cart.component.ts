@@ -23,7 +23,8 @@ export class CartComponent {
 			this.productService.getCart().subscribe((res) => {
 				this.cartService.getCart(res.data).subscribe((response) => {
 					this.cart = response.data;
-					this.total = res.total;
+					this.total = response.total;
+					console.log(this.total);
 					this.cart.map((product) => {
 						product.image =
 							GlobalVariables.staticImage + product.image;
@@ -56,8 +57,23 @@ export class CartComponent {
 			cartArr.splice(cartArr.indexOf(item), 1);
 			localStorage.setItem('cart', JSON.stringify(cartArr));
 			this.cart = this.cart.filter((cartItem) => cartItem._id != item);
-			const discount = item.discount ? item.discount : 0;
-			this.total -= item.price - (item.price * discount) / 100;
+			if (this.cart.length > 0) {
+				const total: any = this.cart.reduce((c1, c2) => {
+					let d1 = c1.discount ? c1.discount : 0;
+					let d2 = c2.discount ? c2.discount : 0;
+					return {
+						price:
+							c1.price -
+							(c1.price * d1) / 100 +
+							c2.price -
+							(c2.price * d2) / 100,
+						discount: 0,
+					};
+				});
+				this.total = parseFloat(total['price'].toFixed(2));
+			} else {
+				this.total = 0;
+			}
 			this.eventService.changeMessage(this.cart.length);
 		}
 	}

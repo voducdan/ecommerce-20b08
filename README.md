@@ -34,24 +34,28 @@ npm install
 npm run ng-dev
 ```
 
+Navigate to `http://localhost:4200/` .The app will automatically reload if you change any of the source files.
+
 > Run server only
 
 ```
 npm run server
 ```
 
+Navigate to `http://localhost:3000/`
+
 > Run project
 
 ```
+npm run start
+```
+
+Navigate to `http://localhost:3000/`.
+
+## Build front-end
+
+```
 npm run build
-```
-
-Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Build
-
-```
-npm start
 ```
 
 ## Routes
@@ -63,3 +67,7 @@ npm start
 -   /dashboard: Dashboard
 -   /dashboard/revenue: Revenue management
 -   /dashboard/newuser: Registered management
+-   /dashboard/producsts: Product management
+-   /cart: user cart
+-   /about: team info
+-   /search/course: search & filter course
