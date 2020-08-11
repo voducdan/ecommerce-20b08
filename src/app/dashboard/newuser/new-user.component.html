@@ -30,9 +30,7 @@
 						>
 							<option
 								[attr.selected]="
-									month + 1 === usersInMonth[0]?.month
-										? 'selected'
-										: null
+									month + 1 === currMonth ? 'selected' : null
 								"
 								*ngFor="let month of months"
 								[value]="month + 1"

@@ -44,6 +44,7 @@ export class NewuserComponent {
 	usersInYear: any;
 	numOfUsersInYear: any;
 	countUserInYear: number;
+	currMonth: number = new Date().getMonth() + 1;
 	months: number[] = [...Array(12).keys()];
 	constructor(
 		private router: Router,
@@ -57,7 +58,9 @@ export class NewuserComponent {
 			}
 			this.usersInMonth = res.data['usersInMonth'];
 			this.numOfUsersInMonth = res.data['numOfUsersInMonth'];
-			this.countUserInMonth = res.data['countUserInMonth'][0].count;
+			this.countUserInMonth = res.data['countUserInMonth'][0]
+				? res.data['countUserInMonth'][0].count
+				: 0;
 			this.usersInYear = res.data['usersInYear'];
 			this.numOfUsersInYear = res.data['numOfUsersInYear'];
 			this.countUserInYear = res.data['countUserInYear'][0].count;
@@ -69,6 +72,7 @@ export class NewuserComponent {
 				this.newUserInYearLabels.push(String(item._id));
 				this.newUserInYearData[0].data.push(item.count);
 			});
+			console.log(this.countUserInYear);
 		});
 	}
 	monthSelected(month) {

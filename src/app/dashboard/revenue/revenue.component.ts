@@ -92,6 +92,7 @@ export class RevenueComponent {
 	invoicesOfYear;
 	totalMonth: any;
 	totalYear: any;
+	currMonth: number = new Date().getMonth() + 1;
 	categories: string[] = [];
 	months: number[] = [...Array(12).keys()];
 	constructor(
