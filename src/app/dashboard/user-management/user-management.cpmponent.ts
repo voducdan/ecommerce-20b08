@@ -9,6 +9,7 @@ import { GlobalVariables } from 'src/app/global';
 })
 export class UserManagementComponent {
 	users: IUser[];
+	deleteStatus: number = 0;
 	constructor(private userManagementService: UserManagementService) {}
 
 	ngOnInit() {
@@ -22,6 +23,15 @@ export class UserManagementComponent {
 		});
 	}
 	editUser(userId) {}
-	deleteUser(userId) {}
+	deleteUser(userId) {
+		this.userManagementService.deleteUser(userId).subscribe((res) => {
+			if (res.success) {
+				this.deleteStatus = 1;
+				this.users = this.users.filter((item) => item._id != userId);
+			} else {
+				this.deleteStatus = -1;
+			}
+		});
+	}
 	filterUser(searchValue) {}
 }

@@ -60,9 +60,22 @@ app.use(
 	express.static(path.join(__dirname, 'dist/Projects'))
 );
 app.use(
-	'/dashboard/producsts',
+	'/dashboard/products',
 	express.static(path.join(__dirname, 'dist/Projects'))
 );
+app.use(
+	'/dashboard/new',
+	express.static(path.join(__dirname, 'dist/Projects'))
+);
+app.use(
+	'/dashboard/users',
+	express.static(path.join(__dirname, 'dist/Projects'))
+);
+app.use(
+	'/dashboard/403',
+	express.static(path.join(__dirname, 'dist/Projects'))
+);
+
 app.use('/cart', express.static(path.join(__dirname, 'dist/Projects')));
 app.use('/about', express.static(path.join(__dirname, 'dist/Projects')));
 app.use(

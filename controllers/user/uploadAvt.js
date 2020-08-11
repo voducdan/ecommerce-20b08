@@ -1,21 +1,10 @@
 const User = require('../../models/user.model');
 const fs = require('fs');
-const globalVar = require('../../globalVar');
 const path = require('path');
 const ErrorHandler = require('../../utils/errorResponse');
+const removeUnicode = require('../../utils/removeUnicode');
 module.exports = async (req, res, next) => {
 	try {
-		let imagePath = '';
-		if (req.file.path.includes('\\')) {
-			const splitedPath = req.file.path.split('\\');
-			imagePath =
-				'/' + splitedPath.slice(1, splitedPath.length).join('/');
-		} else {
-			const splitedPath = req.file.path.split('/');
-			imagePath =
-				'/' + splitedPath.slice(3, splitedPath.length).join('/');
-		}
-
 		if (req.user.image) {
 			const oldImagePath = path.join(
 				__dirname,
@@ -24,8 +13,12 @@ module.exports = async (req, res, next) => {
 				'uploads',
 				req.user.image
 			);
-			fs.unlinkSync(oldImagePath);
+			if (fs.existsSync(path)) {
+				fs.unlinkSync(oldImagePath);
+			}
 		}
+		const imagePath = `/images/${req.file.filename}`;
+		console.log(imagePath);
 		const updatedUser = await User.findByIdAndUpdate(req.user._id, {
 			image: imagePath,
 		});

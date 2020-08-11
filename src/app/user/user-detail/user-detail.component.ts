@@ -40,6 +40,14 @@ export class UserDetailComponent {
 			this.avtUploadErr = 'Only images are supported.';
 			return;
 		}
+		if (
+			this.avt.name.includes(' ') ||
+			/[^\u0000-\u00ff]/.test(this.avt.name)
+		) {
+			this.avtUploadErr =
+				'File name must not contain space or unicode character';
+			return;
+		}
 		const reader = new FileReader();
 		reader.readAsDataURL(this.avt);
 		reader.onload = (_event) => {

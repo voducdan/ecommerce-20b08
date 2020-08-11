@@ -10,6 +10,12 @@
 				</div>
 			</div>
 			<div class="container users">
+				<div *ngIf="deleteStatus === 1" class="alert alert-success">
+					Delete user successfully
+				</div>
+				<div *ngIf="deleteStatus === -1" class="alert alert-danger">
+					An error occur when delete user
+				</div>
 				<div class="row">
 					<div class="col-lg-4 col-sm-9 mb-3">
 						<div class="search-user">

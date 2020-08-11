@@ -17,7 +17,7 @@ const getUserCourses = require('../controllers/user/getUserCourses');
 const getUserCart = require('../controllers/user/getUserCart');
 const updateUserCart = require('../controllers/user/updateUserCart');
 const deleteCartItem = require('../controllers/user/deleteCartItem');
-
+const deleteUser = require('../controllers/user/deleteUser.js');
 const {
 	forgotPassword,
 	resetPassword,
@@ -31,7 +31,7 @@ router
 	.get(checkToken, getUser)
 	.post(createUser)
 	.put(checkToken, updateUser);
-
+router.delete('/:id', checkToken, authorize('Admin'), deleteUser);
 router.post('/auth', login);
 router.post('/upload/avt', checkToken, upload.single('avt'), uploadAvt);
 router.put('/password', checkToken, changePass);
