@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { productDetailRoutes } from './product-detail.routes';
 
 import { ProductDetailComponent } from './product-detail.component';
@@ -16,6 +16,8 @@ import { SharedModule } from '../shared/shared.module';
 	imports: [
 		CommonModule,
 		SharedModule,
+		FormsModule,
+		ReactiveFormsModule,
 		RouterModule.forChild(productDetailRoutes),
 	],
 	declarations: [

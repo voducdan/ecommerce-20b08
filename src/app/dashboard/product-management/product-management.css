@@ -95,3 +95,14 @@
 .course-action:hover {
 	color: rgb(17, 15, 15);
 }
+
+.border-left-primary {
+	border-left: 0.25rem solid #4e73df !important;
+}
+.border-left-yellow {
+	border-left: 0.25rem solid yellow !important;
+}
+
+.border-left-danger {
+	border-left: 0.25rem solid red !important;
+}

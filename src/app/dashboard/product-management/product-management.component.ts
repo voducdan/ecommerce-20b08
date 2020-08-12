@@ -12,6 +12,9 @@ export class ProductManagementComponent {
 
 	products: IProduct[];
 	filteredCourses: IProduct[];
+	totalCourses: number;
+	totalMoney: number;
+	selledCourses: number;
 	ngOnInit() {
 		this.productService.getProducts().subscribe((res) => {
 			this.products = res.data;
@@ -19,6 +22,11 @@ export class ProductManagementComponent {
 			this.products.map((product) => {
 				product.image = GlobalVariables.staticImage + product.image;
 			});
+		});
+		this.productService.getProductsInfo().subscribe((res) => {
+			this.totalCourses = res.data.totalCourse;
+			this.totalMoney = res.data.totalMoney;
+			this.selledCourses = res.data.selledCourses;
 		});
 	}
 	deleteCourse(courseId) {

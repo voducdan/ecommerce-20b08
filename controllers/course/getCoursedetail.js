@@ -7,7 +7,9 @@ module.exports = async (req, res, next) => {
 
 	try {
 		const course = await Course.find({ _id: courseId });
-		const reviews = await Reviews.find({ course: courseId });
+		const reviews = await Reviews.find({ course: courseId }).sort({
+			create_at: -1,
+		});
 		return res.status(200).json({
 			success: true,
 			data: course,

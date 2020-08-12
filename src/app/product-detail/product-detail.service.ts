@@ -9,6 +9,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { GlobalVariables } from '../global/index';
+import { AuthService } from '../dashboard/shared/auth.services';
 
 const httpOptions = {
 	headers: new HttpHeaders({ 'Content-type': 'application/json' }),
@@ -19,7 +20,7 @@ const httpOptions = {
 	providedIn: 'root',
 })
 export class ProductDetailService {
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient, private authService: AuthService) {}
 
 	private handleError(error: HttpErrorResponse) {
 		if (error.error instanceof ErrorEvent) {
@@ -50,6 +51,22 @@ export class ProductDetailService {
 					'/courses/' +
 					categoryId +
 					'/suggestion',
+				httpOptions
+			)
+			.pipe(map(this.extractData, catchError(this.handleError)));
+	}
+
+	review(review): Observable<any> {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-type': 'application/json',
+				authorization: `Bearer ${this.authService.getToken()}`,
+			}),
+		};
+		return this.http
+			.post(
+				GlobalVariables.apiURL + '/courses/review',
+				review,
 				httpOptions
 			)
 			.pipe(map(this.extractData, catchError(this.handleError)));

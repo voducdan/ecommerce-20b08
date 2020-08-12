@@ -12,25 +12,56 @@
 								><label
 									for="reviews-search-text-input"
 									class="sr-only control-label"
-									>Search reviews</label
+									>Filter reviews</label
 								><input
+									#reviewFilter
+									(keyup)="
+										filterReviews(reviewFilter.value + '')
+									"
 									placeholder="Search reviews"
 									data-purpose="search-input"
 									type="text"
 									id="reviews-search-text-input"
 									class="search-widget--search-text-input--14MNb form-control"
-									value="" /><span class="input-group-btn"
-									><button
-										data-purpose="search-button"
-										type="button"
-										class="btn btn-sm btn-secondary search-review-btn"
-									>
-										<span
-											aria-label="Search"
-											class="udi udi-search"
-										></span></button></span
-							></span>
+									value=""
+								/>
+							</span>
 						</div>
+					</form>
+					<form
+						*ngIf="enableReview"
+						[formGroup]="reviewForm"
+						#review="ngForm"
+						(ngSubmit)="review.form.valid && onReview()"
+					>
+						<div class="add-rating">
+							<label class="mr-2">Rate this course</label>
+							<span
+								(mouseenter)="onRate($event)"
+								class="stars-outer rate"
+							>
+								<span
+									class="stars-inner"
+									[style.width.%]="rate ? rate : 0"
+								>
+								</span>
+							</span>
+						</div>
+						<div class="add-review mb">
+							<label for="newreview">Add a review</label>
+							<textarea
+								formControlName="reviewContent"
+								class="form-control rounded-0"
+								id="newreview"
+								rows="3"
+							></textarea>
+						</div>
+						<button
+							class="btn btn-primary my-3 float-right"
+							type="submit"
+						>
+							Send
+						</button>
 					</form>
 				</div>
 				<div

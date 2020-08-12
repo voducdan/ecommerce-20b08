@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Color, Label } from 'ng2-charts';
 
 import { RevenueService } from './revenue.services';
+import { strict } from 'assert';
 
 @Component({
 	selector: 'my-app',
@@ -37,7 +38,7 @@ export class RevenueComponent {
 	public revenueInYearLabels: Label[] = [];
 
 	public revenueByCategoryData: ChartDataSets[] = [
-		{ data: [], label: 'Revenue By Category, total:' },
+		{ data: [], label: 'Revenue By Category, total: ' },
 	];
 	public revenueByCategoryLabels: Label[] = [];
 	public invoicesByCategoryData: ChartDataSets[] = [
@@ -145,6 +146,8 @@ export class RevenueComponent {
 		this.revenueService.getRevenueByCategory().subscribe(
 			(res) => {
 				const revenueOfCategory = res.data;
+				let totalRevenueByCategory = 0;
+				let totalInvoiceByCategory = 0;
 				for (let item of Object.entries(revenueOfCategory)) {
 					this.revenueByCategoryLabels.push(String(item[0]));
 					this.categories.push(item[0]);
@@ -154,7 +157,15 @@ export class RevenueComponent {
 					this.invoicesByCategoryData[0].data.push(
 						Number(item[1]['count'])
 					);
+					totalRevenueByCategory += Number(item[1]['revenue']);
+					totalInvoiceByCategory += Number(item[1]['count']);
 				}
+				this.revenueByCategoryData[0].label =
+					this.revenueByCategoryData[0].label +
+					totalRevenueByCategory.toString();
+				this.invoicesByCategoryData[0].label =
+					this.invoicesByCategoryData[0].label +
+					totalInvoiceByCategory.toString();
 			},
 			(err) => {
 				console.log(err);

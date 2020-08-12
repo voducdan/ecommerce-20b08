@@ -8,7 +8,6 @@
 .stars-outer::before {
 	content: '\f005 \f005 \f005 \f005 \f005';
 	font-size: 13px;
-	margin-right: 5px;
 	color: #dedfe0;
 }
 
@@ -98,6 +97,7 @@
 	border-top: 1px solid #dedfe0;
 	margin-bottom: 27px;
 	padding-top: 24px;
+	clear: both;
 }
 
 .individual-review--container--3kHO-:last-child {

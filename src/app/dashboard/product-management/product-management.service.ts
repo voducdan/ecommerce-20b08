@@ -44,6 +44,14 @@ export class ProductManagementService {
 			.get(GlobalVariables.apiURL + '/courses', httpOptions)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
+	getProductsInfo(): Observable<any> {
+		return this.http
+			.get(
+				GlobalVariables.apiURL + '/courses/info/statistics',
+				httpOptions
+			)
+			.pipe(map(this.extractData), catchError(this.handleError));
+	}
 
 	deleteProduct(productId): Observable<any> {
 		if (!httpOptions.headers.get('authorization')) {
