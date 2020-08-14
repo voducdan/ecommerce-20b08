@@ -7,7 +7,7 @@ export interface IUser {
 	image?: string;
 	email: string;
 	password: string;
-	role: string;
+	role?: string;
 	payment?: {
 		name_on_card: string;
 		card_number: string;

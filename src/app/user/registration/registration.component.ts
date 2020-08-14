@@ -28,7 +28,6 @@ export class RegistrationComponent {
 		firstname: '',
 		password: '',
 		email: '',
-		role: '',
 	};
 	passwordComfirm: string;
 	acceptTerm: Boolean = false;

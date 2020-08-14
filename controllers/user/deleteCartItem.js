@@ -18,18 +18,30 @@ module.exports = async (req, res, next) => {
 				total: 0,
 			});
 		}
-		const total = updateCart.cart.reduce((c1, c2) => {
-			let d1 = c1.discount ? c1.discount : 0;
-			let d2 = c2.discount ? c2.discount : 0;
-			return {
-				price:
-					c1.price -
-					(c1.price * d1) / 100 +
-					c2.price -
-					(c2.price * d2) / 100,
-				discount: 0,
-			};
-		});
+		let total = {};
+		if (updateCart.cart.length === 1) {
+			let d1 = updateCart.cart[0].discount
+				? updateCart.cart[0].discount
+				: 0;
+			total.price =
+				updateCart.cart[0].price -
+				(updateCart.cart[0].price * d1) / 100;
+		} else {
+			total = updateCart.cart.reduce((c1, c2) => {
+				let d1 = c1.discount ? c1.discount : 0;
+				let d2 = c2.discount ? c2.discount : 0;
+				console.log(c1);
+				console.log(c2);
+				return {
+					price:
+						c1.price -
+						(c1.price * d1) / 100 +
+						c2.price -
+						(c2.price * d2) / 100,
+					discount: 0,
+				};
+			});
+		}
 		return res.status(200).json({
 			success: true,
 			data: updateCart.cart,

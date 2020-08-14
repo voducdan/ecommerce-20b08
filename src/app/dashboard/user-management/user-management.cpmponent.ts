@@ -9,12 +9,27 @@ import { GlobalVariables } from 'src/app/global';
 })
 export class UserManagementComponent {
 	users: IUser[];
+	user: any = {};
 	deleteStatus: number = 0;
+	filteredUsers: IUser[];
+	options = {
+		fieldSeparator: ',',
+		quoteStrings: '"',
+		decimalseparator: '.',
+		showLabels: false,
+		headers: ['Firstname', 'Lastname', 'Email', 'Role', 'Create_at'],
+		showTitle: true,
+		title: 'User information',
+		useBom: false,
+		removeNewLines: true,
+		keys: ['firstname', 'lastname', 'email', 'role', 'create_at'],
+	};
 	constructor(private userManagementService: UserManagementService) {}
 
 	ngOnInit() {
 		this.userManagementService.getUsers().subscribe((res) => {
 			this.users = res.data;
+			this.filteredUsers = res.data;
 			this.users.forEach((user) => {
 				if (user.image) {
 					user.image = GlobalVariables.staticImage + user.image;
@@ -22,7 +37,7 @@ export class UserManagementComponent {
 			});
 		});
 	}
-	editUser(userId) {}
+	banUser(userId) {}
 	deleteUser(userId) {
 		this.userManagementService.deleteUser(userId).subscribe((res) => {
 			if (res.success) {
@@ -33,5 +48,20 @@ export class UserManagementComponent {
 			}
 		});
 	}
-	filterUser(searchValue) {}
+	filterUser(searchtTerm) {
+		this.users = this.filteredUsers.filter(
+			(item) =>
+				item.firstname
+					.toLowerCase()
+					.indexOf(searchtTerm.toLowerCase()) > -1 ||
+				item.lastname.toLowerCase().indexOf(searchtTerm.toLowerCase()) >
+					-1
+		);
+		console.log(this.users);
+	}
+	getUser(userId) {
+		this.userManagementService.getUser(userId).subscribe((res) => {
+			this.user = res.data[0];
+		});
+	}
 }

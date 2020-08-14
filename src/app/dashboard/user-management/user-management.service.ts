@@ -50,6 +50,18 @@ export class UserManagementService {
 			.get(GlobalVariables.apiURL + '/user/all', httpOptions)
 			.pipe(map(this.extractData), catchError(this.handleError));
 	}
+	getUser(userId): Observable<any> {
+		if (!httpOptions.headers.get('authorization')) {
+			httpOptions.headers = httpOptions.headers.append(
+				'authorization',
+				`Bearer ${this.authService.getToken()}`
+			);
+		}
+		httpOptions.params = { userId };
+		return this.http
+			.get(GlobalVariables.apiURL + '/user/byadmin', httpOptions)
+			.pipe(map(this.extractData), catchError(this.handleError));
+	}
 
 	deleteUser(userId): Observable<any> {
 		if (!httpOptions.headers.get('authorization')) {

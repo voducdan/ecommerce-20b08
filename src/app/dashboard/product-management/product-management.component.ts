@@ -40,12 +40,9 @@ export class ProductManagementComponent {
 	editCourse(courseId) {}
 
 	filterCourse(searchtTerm) {
-		if (searchtTerm !== '') {
-			this.products = this.filteredCourses.filter(
-				(item) =>
-					item.name.toLowerCase().indexOf(searchtTerm.toLowerCase()) >
-					-1
-			);
-		}
+		this.products = this.filteredCourses.filter(
+			(item) =>
+				item.name.toLowerCase().indexOf(searchtTerm.toLowerCase()) > -1
+		);
 	}
 }

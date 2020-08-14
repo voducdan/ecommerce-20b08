@@ -18,6 +18,7 @@ export class CartComponent {
 	) {}
 	cart: any;
 	total: number;
+	checkoutErr: boolean = false;
 	ngOnInit() {
 		if (this.authService.getToken()) {
 			this.productService.getCart().subscribe((res) => {
@@ -75,5 +76,19 @@ export class CartComponent {
 			}
 			this.eventService.changeMessage(this.cart.length);
 		}
+	}
+	checkout() {
+		this.cartService.checkout().subscribe((res) => {
+			if (res.success) {
+				const payment = res.data;
+				for (let i = 0; i < payment.links.length; i++) {
+					if (payment.links[i].rel === 'approval_url') {
+						window.open(payment.links[i].href, '_blank');
+					}
+				}
+			} else {
+				this.checkoutErr = true;
+			}
+		});
 	}
 }

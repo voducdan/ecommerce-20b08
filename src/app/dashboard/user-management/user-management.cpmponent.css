@@ -75,3 +75,11 @@
 .user-action:hover {
 	color: rgb(17, 15, 15);
 }
+.user-row:hover {
+	background-color: #f9f1f1;
+}
+.user-to-csv {
+	background-color: #1976d2;
+	text-align: center;
+	color: white;
+}

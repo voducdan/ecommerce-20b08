@@ -45,10 +45,6 @@ const userSchema = new mongoose.Schema({
 		minlength: 6,
 		select: false,
 	},
-	role: {
-		type: String,
-		default: 'Member',
-	},
 	payment: new mongoose.Schema({
 		name_on_card: {
 			type: String,
@@ -87,6 +83,10 @@ const userSchema = new mongoose.Schema({
 	create_at: {
 		type: Date,
 		default: Date.now,
+	},
+	role: {
+		type: String,
+		default: 'Member',
 	},
 	day: Number,
 	month: Number,

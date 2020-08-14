@@ -7,6 +7,9 @@
 			<h3>Shopping cart</h3>
 		</div>
 	</div>
+	<div *ngIf="checkoutErr" class="alert alert-danger">
+		A error occur when checkout, please try again!!!
+	</div>
 	<div class="cart-content">
 		<div *ngIf="cart && cart.length === 0" class="container">
 			<h5>0 Courses in Cart</h5>
@@ -59,7 +62,7 @@
 					<h2>
 						<b><i class="fas fa-dollar-sign"></i>{{ total }}</b>
 					</h2>
-					<div class="btn btn-danger px-5 py-2">
+					<div (click)="checkout()" class="btn btn-danger px-5 py-2">
 						Checkout
 					</div>
 				</div>

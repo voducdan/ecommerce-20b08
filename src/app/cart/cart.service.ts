@@ -56,4 +56,16 @@ export class CartService {
 			httpOptions
 		);
 	}
+	checkout(): Observable<any> {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-type': 'application/json',
+				authorization: `Bearer ${this.authService.getToken()}`,
+			}),
+		};
+		return this.http.get(
+			GlobalVariables.apiURL + '/payment/pay',
+			httpOptions
+		);
+	}
 }

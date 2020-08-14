@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { Angular2CsvModule } from 'angular2-csv';
 
 import { dashboardRoutes } from './dashboard.routes';
 
@@ -14,6 +15,7 @@ import { NewProductComponent } from './product-management/new-product/new-produc
 import { UserManagementComponent } from './user-management/user-management.cpmponent';
 import { DashboardLeftMenu } from './shared/left-menu.component';
 import { ForbiddenComponent } from './shared/forbidden/forbidden.component';
+import { CustomAngular2csvComponent } from './user-management/angular2csv.component';
 @NgModule({
 	declarations: [
 		RevenueComponent,
@@ -23,12 +25,14 @@ import { ForbiddenComponent } from './shared/forbidden/forbidden.component';
 		DashboardLeftMenu,
 		ForbiddenComponent,
 		UserManagementComponent,
+		CustomAngular2csvComponent,
 	],
 	imports: [
 		CommonModule,
 		HttpClientModule,
 		ChartsModule,
 		CKEditorModule,
+		Angular2CsvModule,
 		RouterModule.forChild(dashboardRoutes),
 	],
 	exports: [DashboardLeftMenu],

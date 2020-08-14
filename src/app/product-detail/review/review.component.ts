@@ -51,13 +51,10 @@ export class ReviewComponent implements OnInit {
 			});
 	}
 	filterReviews(searchtTerm) {
-		if (searchtTerm !== '') {
-			this.reviews = this.filteredReviews.filter(
-				(item) =>
-					item.content
-						.toLowerCase()
-						.indexOf(searchtTerm.toLowerCase()) > -1
-			);
-		}
+		this.reviews = this.filteredReviews.filter(
+			(item) =>
+				item.content.toLowerCase().indexOf(searchtTerm.toLowerCase()) >
+				-1
+		);
 	}
 }

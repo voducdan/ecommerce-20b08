@@ -17,7 +17,7 @@
 					An error occur when delete user
 				</div>
 				<div class="row">
-					<div class="col-lg-4 col-sm-9 mb-3">
+					<div class="col-lg-4 col-sm-7 mb-3">
 						<div class="search-user">
 							<div class="search-icon">
 								<span style="display: inline-block;">
@@ -43,6 +43,18 @@
 							/>
 						</div>
 					</div>
+					<div class="col-lg-4 col-sm-5">
+						<app-angular2csv
+							[data]="users"
+							filename="users"
+							[options]="options"
+						>
+							<div class="btn user-to-csv">
+								Export to CSV
+								<i class="fas fa-download"></i>
+							</div>
+						</app-angular2csv>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-12">
@@ -58,7 +70,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let user of users">
+								<tr
+									*ngFor="let user of users"
+									(click)="getUser(user._id)"
+									class="user-row"
+									data-toggle="modal"
+									data-target="#usermodal"
+								>
 									<td>
 										<img
 											*ngIf="user.image"
@@ -71,24 +89,14 @@
 											*ngIf="!user.image"
 											class="non-image-avt"
 										>
-											<form>
-												<label for="avt"
-													>Upload avt</label
-												>
-												<br />
-												<input
-													type="file"
-													name=""
-													id="avt"
-												/>
-											</form>
+											<span>No Avt</span>
 										</div>
 									</td>
 									<td>
 										{{user.firstname}} {{ user.lastname}}
 									</td>
 									<td>{{user.email}}</td>
-									<td>{{user.role}}$</td>
+									<td>{{user.role}}</td>
 									<td>
 										{{user.create_at|date:'shortDate'}}
 									</td>
@@ -109,8 +117,8 @@
 										>
 											<a
 												class="text-primary mr-2 user-action"
-												(click)="editUser(user._id)"
-												>Edit</a
+												(click)="banUser(user._id)"
+												>Ban</a
 											>
 											/
 											<a
@@ -125,6 +133,170 @@
 						</table>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div
+	class="modal fade"
+	id="usermodal"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-center" id="exampleModalLabel">
+					User information
+				</h5>
+				<button
+					type="button"
+					class="close"
+					data-dismiss="modal"
+					aria-label="Close"
+				>
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="col-xs-12">
+					<nav>
+						<div
+							class="nav nav-tabs nav-fill"
+							id="nav-tab"
+							role="tablist"
+						>
+							<a
+								class="nav-item nav-link active"
+								id="nav-home-tab"
+								data-toggle="tab"
+								href="#nav-profile"
+								role="tab"
+								aria-controls="nav-profile"
+								aria-selected="true"
+								>Profile</a
+							>
+							<a
+								class="nav-item nav-link"
+								id="nav-contact-tab"
+								data-toggle="tab"
+								href="#nav-payment"
+								role="tab"
+								aria-controls="nav-payment"
+								aria-selected="false"
+								>Payment</a
+							>
+							<a
+								class="nav-item nav-link"
+								id="nav-about-tab"
+								data-toggle="tab"
+								href="#nav-courses"
+								role="tab"
+								aria-controls="nav-courses"
+								aria-selected="false"
+								>Courses</a
+							>
+						</div>
+					</nav>
+					<div
+						class="tab-content py-3 px-3 px-sm-0"
+						id="nav-tabContent"
+					>
+						<div
+							class="tab-pane fade show active"
+							id="nav-profile"
+							role="tabpanel"
+							aria-labelledby="nav-home-tab"
+						>
+							<div
+								class="col d-flex flex-column flex-sm-row justify-content-between mb-3"
+							>
+								<div
+									class="text-center text-sm-left mb-2 mb-sm-0"
+								>
+									<h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">
+										{{ user.firstname }} {{ user.lastname }}
+									</h4>
+								</div>
+								<div class="text-center text-sm-right">
+									<span class="badge badge-secondary"
+										>{{ user.role }}</span
+									>
+									<div class="text-muted">
+										<small
+											>Joined {{ user.create_at | date:
+											'fullDate' }}</small
+										>
+									</div>
+								</div>
+							</div>
+							<div class="detail-info py-3 pl-3">
+								<h6>Headline: {{user.headline}}</h6>
+								<h6>Website: {{user.website}}</h6>
+								<h6>Email: {{user.email}}</h6>
+							</div>
+						</div>
+						<div
+							class="tab-pane fade"
+							id="nav-payment"
+							role="tabpanel"
+							aria-labelledby="nav-contact-tab"
+						>
+							<div
+								*ngIf="!user.payment"
+								class="payment-empty pl-3"
+							>
+								<h3>Payment info is empty</h3>
+							</div>
+							<div class="payment pl-3" *ngIf="user.payment">
+								<h6>
+									Name on card: {{user.payment.name_on_card}}
+								</h6>
+								<h6>
+									Card number: {{user.payment.card_number}}
+								</h6>
+								<h6>Type: {{user.payment.type}}</h6>
+								<h6>Expire: {{user.payment.date}}</h6>
+							</div>
+						</div>
+						<div
+							class="tab-pane fade"
+							id="nav-courses"
+							role="tabpanel"
+							aria-labelledby="nav-about-tab"
+						>
+							<h3 class="text-center">Enroled Courses</h3>
+							<h4
+								*ngIf=" user.enrolled_courses && user.enrolled_courses.length===0"
+							>
+								User have not enrolled any course
+							</h4>
+							<ul
+								*ngIf="user.enrolled_courses &&  user.enrolled_courses.length>0"
+								style="list-style: inside;"
+							>
+								<li
+									*ngFor="let course of user.enrolled_courses"
+								>
+									{{course.name}}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button
+					type="button"
+					class="btn btn-secondary"
+					data-dismiss="modal"
+				>
+					Close
+				</button>
 			</div>
 		</div>
 	</div>

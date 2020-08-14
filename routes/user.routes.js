@@ -18,6 +18,7 @@ const getUserCart = require('../controllers/user/getUserCart');
 const updateUserCart = require('../controllers/user/updateUserCart');
 const deleteCartItem = require('../controllers/user/deleteCartItem');
 const deleteUser = require('../controllers/user/deleteUser.js');
+const getUserByAdmin = require('../controllers/user/getUserByAdmin');
 const {
 	forgotPassword,
 	resetPassword,
@@ -47,4 +48,5 @@ router
 	.route('/cart')
 	.post(checkToken, updateUserCart)
 	.put(checkToken, deleteCartItem);
+router.get('/byadmin', checkToken, authorize('Admin'), getUserByAdmin);
 module.exports = router;
